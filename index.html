@@ -3,157 +3,180 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Studio Name — Process</title>
-  <meta name="description" content="Our five-step design process, from first conversation to finished home.">
+  <title>Process — Studio Name</title>
+  <meta name="description" content="How we work: five steps for architecture and five for interior design.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
   <header class="site-header" id="top">
-    <a class="wordmark" href="#top">Studio Name</a>
-    <button class="menu-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
-    <nav class="site-nav" id="site-nav" aria-label="Main">
-      <a href="#projects">Projects</a>
+    <nav class="nav nav-left" aria-label="Main">
       <a href="#practice">Practice</a>
-      <a href="#process" aria-current="page">Process</a>
+      <a href="#architecture" aria-current="page">Process</a>
+      <a href="#projects">Projects</a>
+    </nav>
+    <a class="wordmark" href="#top" aria-label="Studio Name, home">STUDIO</a>
+    <nav class="nav nav-right" aria-label="Secondary">
+      <a href="#journal">Journal</a>
       <a href="#contact">Contact</a>
     </nav>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu"><span></span><span></span></button>
   </header>
+
+  <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile" hidden>
+    <a href="#practice">Practice</a>
+    <a href="#architecture">Process</a>
+    <a href="#projects">Projects</a>
+    <a href="#journal">Journal</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
   <main>
 
     <section class="hero">
-      <p class="eyebrow">Process</p>
-      <h1>Five steps, <em>one</em> considered home.</h1>
-      <div class="hero-foot">
-        <p class="hero-intro">
-          Placeholder introduction. Two or three sentences about how the studio
-          works with its clients and what they can expect along the way.
-        </p>
-        <a class="scroll-cue" href="#process">Scroll <span aria-hidden="true">↓</span></a>
+      <a href="#architecture">Architecture</a>
+      <a href="#interiors">Interior Design</a>
+    </section>
+
+    <section class="process" id="architecture">
+      <div class="process-intro">
+        <p class="lead">With clarity and care, we guide the architecture from the first brief to the final handover. We coordinate and resolve every stage for you, so the project moves ahead with confidence.</p>
+        <a class="text-link" href="#contact">Request consultation</a>
+      </div>
+      <div class="steps">
+          <article class="step" style="--i:0">
+            <span class="step-num">01</span>
+            <div class="step-main">
+              <h3 class="step-title">Introduction</h3>
+              <p class="step-desc">We start with you and with the site. We learn how you want to live, then study the property closely: its orientation, its outlook and the rules that govern what can be built there. That sets the direction and makes the path to approval clear.</p>
+            </div>
+          </article>
+          <article class="step" style="--i:1">
+            <span class="step-num">02</span>
+            <div class="step-main">
+              <h3 class="step-title">Concept</h3>
+              <p class="step-desc">This is where the home takes shape. We draw the plans and the exterior around the site and your daily life, working through proportion, light and how the house meets the street. You see the design, and how it sits on the land, before anything moves ahead.</p>
+            </div>
+          </article>
+          <article class="step" style="--i:2">
+            <span class="step-num">03</span>
+            <div class="step-main">
+              <h3 class="step-title">Coordination</h3>
+              <p class="step-desc">Once the concept is settled, we bring together every discipline the project needs, from planners to consultants and specialists, so the design is sound, compliant and buildable, and stays true to the original idea.</p>
+            </div>
+          </article>
+          <article class="step" style="--i:3">
+            <span class="step-num">04</span>
+            <div class="step-main">
+              <h3 class="step-title">Approvals</h3>
+              <p class="step-desc">With the drawings refined and the documents complete, we submit the project to your local authority and manage the application from start to finish. The paperwork is our job, not yours.</p>
+            </div>
+          </article>
+          <article class="step" style="--i:4">
+            <span class="step-num">05</span>
+            <div class="step-main">
+              <h3 class="step-title">Construction support</h3>
+              <p class="step-desc">We stay involved while the home is built, protecting the thinking behind each drawing and working with your builder and consultants until the house is finished.</p>
+            </div>
+          </article>
       </div>
     </section>
 
-    <!-- The five steps. Each .step is sticky; as you scroll, the next one
-         slides up and docks under the title bar of the one before it. -->
-    <section class="steps" id="process" aria-label="Our process">
-
-      <article class="step" style="--i:0">
-        <header class="step-bar">
-          <span class="step-num">01</span>
-          <h2 class="step-title">Brief</h2>
-          <span class="step-tag">Listen</span>
-        </header>
-        <div class="step-body">
-          <div class="step-text">
-            <p class="step-lead">Placeholder text for the first step. Describe how the first conversation works and what you need to learn about the client.</p>
-            <ul class="step-list">
-              <li>Placeholder item</li>
-              <li>Placeholder item</li>
-              <li>Placeholder item</li>
-            </ul>
-          </div>
-          <div class="step-media" role="img" aria-label="Image placeholder"><span>Image</span></div>
-        </div>
-      </article>
-
-      <article class="step" style="--i:1">
-        <header class="step-bar">
-          <span class="step-num">02</span>
-          <h2 class="step-title">Concept</h2>
-          <span class="step-tag">Imagine</span>
-        </header>
-        <div class="step-body">
-          <div class="step-text">
-            <p class="step-lead">Placeholder text for the second step. Describe how the direction, palette and mood of the project are set.</p>
-            <ul class="step-list">
-              <li>Placeholder item</li>
-              <li>Placeholder item</li>
-              <li>Placeholder item</li>
-            </ul>
-          </div>
-          <div class="step-media" role="img" aria-label="Image placeholder"><span>Image</span></div>
-        </div>
-      </article>
-
-      <article class="step" style="--i:2">
-        <header class="step-bar">
-          <span class="step-num">03</span>
-          <h2 class="step-title">Development</h2>
-          <span class="step-tag">Refine</span>
-        </header>
-        <div class="step-body">
-          <div class="step-text">
-            <p class="step-lead">Placeholder text for the third step. Describe how the chosen direction is worked through room by room.</p>
-            <ul class="step-list">
-              <li>Placeholder item</li>
-              <li>Placeholder item</li>
-              <li>Placeholder item</li>
-            </ul>
-          </div>
-          <div class="step-media" role="img" aria-label="Image placeholder"><span>Image</span></div>
-        </div>
-      </article>
-
-      <article class="step" style="--i:3">
-        <header class="step-bar">
-          <span class="step-num">04</span>
-          <h2 class="step-title">Documentation</h2>
-          <span class="step-tag">Specify</span>
-        </header>
-        <div class="step-body">
-          <div class="step-text">
-            <p class="step-lead">Placeholder text for the fourth step. Describe the drawings, selections and schedules prepared before work begins.</p>
-            <ul class="step-list">
-              <li>Placeholder item</li>
-              <li>Placeholder item</li>
-              <li>Placeholder item</li>
-            </ul>
-          </div>
-          <div class="step-media" role="img" aria-label="Image placeholder"><span>Image</span></div>
-        </div>
-      </article>
-
-      <article class="step" style="--i:4">
-        <header class="step-bar">
-          <span class="step-num">05</span>
-          <h2 class="step-title">Delivery</h2>
-          <span class="step-tag">Build</span>
-        </header>
-        <div class="step-body">
-          <div class="step-text">
-            <p class="step-lead">Placeholder text for the fifth step. Describe how the project is built, installed and handed over.</p>
-            <ul class="step-list">
-              <li>Placeholder item</li>
-              <li>Placeholder item</li>
-              <li>Placeholder item</li>
-            </ul>
-          </div>
-          <div class="step-media" role="img" aria-label="Image placeholder"><span>Image</span></div>
-        </div>
-      </article>
-
+    <!-- Full-width image with a quote. Replace .ph with an <img>. -->
+    <section class="band">
+      <div class="ph" role="img" aria-label="Image placeholder"></div>
+      <figure class="quote">
+        <blockquote>&ldquo;Every project here is <em>a partnership.</em> Our ideas grow together until they reflect you and the place you call home.&rdquo;</blockquote>
+        <figcaption>&ndash; Name Surname, Founder</figcaption>
+      </figure>
     </section>
 
-    <section class="cta" id="contact">
-      <p class="eyebrow">Start a project</p>
-      <h2>Tell us about your home.</h2>
-      <a class="button" href="mailto:hello@example.com">Get in touch</a>
+    <section class="process" id="interiors">
+      <div class="process-intro">
+        <p class="lead">With the same clarity and care, we shape the interior, from how you live to how it is finished. We weigh each material, proportion and joint, so the home feels calm, cohesive and completely yours.</p>
+        <a class="text-link" href="#contact">Request consultation</a>
+      </div>
+      <div class="steps">
+          <article class="step" style="--i:0">
+            <span class="step-num">01</span>
+            <div class="step-main">
+              <h3 class="step-title">Introduction</h3>
+              <p class="step-desc">It all starts with you. Before we draw anything, we learn how you live, how you host and how you want your home to feel. One conversation is enough to shape the brief and set the direction, and the result is yours alone.</p>
+            </div>
+          </article>
+          <article class="step" style="--i:1">
+            <span class="step-num">02</span>
+            <div class="step-main">
+              <h3 class="step-title">Concept</h3>
+              <p class="step-desc">Here your home begins to appear. Mood boards come first and set the tone, palette and atmosphere. A full 3D visualisation of your living spaces follows, so you can walk through the home and feel it well before it exists.</p>
+            </div>
+          </article>
+          <article class="step" style="--i:2">
+            <span class="step-num">03</span>
+            <div class="step-main">
+              <h3 class="step-title">Development</h3>
+              <p class="step-desc">With the direction agreed, we take it through every room. Layout, cabinetry and materials are each worked out to the same standard, until the whole home reads as one.</p>
+            </div>
+          </article>
+          <article class="step" style="--i:3">
+            <span class="step-num">04</span>
+            <div class="step-main">
+              <h3 class="step-title">Documentation &amp; handover</h3>
+              <p class="step-desc">Every decision is made and every detail drawn. You receive the complete drawings and schedules: a home fully thought through, measured to the last inch and ready to build.</p>
+            </div>
+          </article>
+          <article class="step" style="--i:4">
+            <span class="step-num">05</span>
+            <div class="step-main">
+              <h3 class="step-title">Construction support</h3>
+              <p class="step-desc">We stay close during construction. As your home is built, we protect the thinking behind each drawing and follow it through to the day you walk in.</p>
+            </div>
+          </article>
+      </div>
+    </section>
+
+    <!-- Full-width image with two large links. Replace .ph with an <img>. -->
+    <section class="tiles" id="practice">
+      <div class="ph" role="img" aria-label="Image placeholder"></div>
+      <a href="#practice">Practice</a>
+      <a href="#projects" id="projects">Projects</a>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="contact-intro">
+        <p class="lead">A home is a conversation before it is a drawing, and it starts with how you want to live. This is where that conversation begins.</p>
+        <p class="small">We take on a limited number of private projects each year, and keep selected work unpublished when our clients ask for privacy.</p>
+      </div>
+      <div class="contact-cols">
+        <div>
+          <h2>Connect.</h2>
+          <dl class="details">
+            <div><dt>Address</dt><dd>Street address, City, State ZIP<br>By appointment only</dd></div>
+            <div><dt>Phone</dt><dd><a href="tel:+10000000000">(000) 000-0000</a></dd></div>
+            <div><dt>Email</dt><dd><a href="mailto:hello@example.com">Click here</a></dd></div>
+          </dl>
+        </div>
+        <div>
+          <h2>Enquire.</h2>
+          <form class="enquire" action="#" method="post">
+            <label>Name<input type="text" name="name" autocomplete="name" required></label>
+            <label>Email<input type="email" name="email" autocomplete="email" required></label>
+            <label>Phone<input type="tel" name="phone" autocomplete="tel"></label>
+            <label>Message<textarea name="message" rows="3"></textarea></label>
+            <button type="submit">Send</button>
+          </form>
+        </div>
+      </div>
     </section>
 
   </main>
 
-  <footer class="site-footer">
-    <span class="wordmark">Studio Name</span>
-    <div class="footer-cols">
-      <p>Street address<br>City, State ZIP</p>
-      <p>hello@example.com<br>(000) 000-0000</p>
-      <p><a href="#">Instagram</a><br><a href="#">Pinterest</a></p>
-    </div>
-    <p class="fine">© <span id="year">2026</span> Studio Name. All rights reserved.</p>
+  <footer class="site-footer" id="journal">
+    <p>Copyright &copy; <span id="year">2026</span> Studio Name. All rights reserved.</p>
+    <a href="#">Privacy policy</a>
   </footer>
 
   <script src="js/main.js"></script>

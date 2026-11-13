@@ -1,57 +1,56 @@
 /* ---------- Tokens ---------- */
 :root {
-  --paper: #f3efe8;
-  --ink: #1f1c18;
-  --muted: #6f685e;
-  --line: rgba(31, 28, 24, 0.16);
+  --paper: #eeeae4;
+  --ink: #000;
+  --ph: #bdbab4;            /* image placeholder tone */
 
-  /* One tone per step, light to dark */
-  --tone-0: #ebe5da;
-  --tone-1: #ddd3c3;
-  --tone-2: #c9bba6;
-  --tone-3: #8c7b66;
-  --tone-4: #2b2620;
+  --serif: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --sans: "Inter", "Helvetica Neue", Arial, sans-serif;
 
-  --serif: "Cormorant Garamond", "Iowan Old Style", Georgia, serif;
-  --sans: "Jost", "Helvetica Neue", Arial, sans-serif;
-
-  --header-h: 72px;  /* fixed site header */
-  --bar-h: 64px;     /* title bar of each step that stays visible in the stack */
-  --gutter: clamp(20px, 4vw, 56px);
-}
-
-@media (max-width: 720px) {
-  :root {
-    --header-h: 60px;
-    --bar-h: 46px;
-  }
+  --header-h: 80px;
+  --gutter: 24px;
+  --row: 70px;               /* height of a collapsed step (rule + title) */
+  --stack-top: 160px;        /* where the first step docks while scrolling */
 }
 
 /* ---------- Base ---------- */
 *, *::before, *::after { box-sizing: border-box; }
-
-html { scroll-behavior: smooth; scroll-padding-top: var(--header-h); }
-
+html { scroll-behavior: smooth; }
 body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
   font-family: var(--sans);
-  font-weight: 300;
-  font-size: 17px;
-  line-height: 1.6;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.62;
   -webkit-font-smoothing: antialiased;
 }
-
-h1, h2, p, ul { margin: 0; }
+h2, h3, p, dl, dd, figure, blockquote { margin: 0; }
 a { color: inherit; text-decoration: none; }
 
-.eyebrow {
-  font-size: 12px;
+.lead {
+  font-family: var(--serif);
   font-weight: 400;
-  letter-spacing: 0.22em;
+  font-size: 28.67px;
+  line-height: 1.33;
+  letter-spacing: -0.005em;
+  text-indent: 2.8em;
+}
+
+.text-link, .nav a, .mobile-menu a, .site-footer, .details dt, .enquire label, .enquire button, .quote figcaption {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1;
   text-transform: uppercase;
-  color: var(--muted);
+}
+
+.text-link {
+  display: inline-block;
+  font-size: 11.75px;
+  font-weight: 500;
+  padding-bottom: 4px;
+  border-bottom: 1px solid currentColor;
 }
 
 /* ---------- Header ---------- */
@@ -60,279 +59,276 @@ a { color: inherit; text-decoration: none; }
   inset: 0 0 auto 0;
   z-index: 100;
   height: var(--header-h);
-  padding: 0 var(--gutter);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  padding: 22px var(--gutter) 0;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: start;
   background: var(--paper);
-  border-bottom: 1px solid var(--line);
 }
+.nav { display: flex; padding-top: 2px; }
+.nav-left { gap: 74px; }
+.nav-right { gap: 74px; justify-content: flex-end; }
+.nav a:hover, .text-link:hover, .site-footer a:hover { opacity: 0.55; }
 
 .wordmark {
-  font-family: var(--serif);
-  font-size: 24px;
-  letter-spacing: 0.04em;
-}
-
-.site-nav { display: flex; gap: clamp(20px, 3vw, 44px); }
-
-.site-nav a {
-  font-size: 13px;
+  font-family: var(--sans);
+  font-size: 30px;
   font-weight: 400;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  padding: 6px 0;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.2s;
+  line-height: 34px;
+  letter-spacing: 0.34em;
+  margin-right: -0.34em;
 }
-.site-nav a:hover,
-.site-nav a[aria-current="page"] { border-bottom-color: currentColor; }
 
 .menu-toggle {
   display: none;
+  justify-self: end;
+  width: 44px;
+  height: 44px;
+  margin: -8px -10px 0 0;
+  padding: 0;
   background: none;
   border: 0;
-  padding: 10px 0;
-  font: inherit;
-  font-size: 13px;
-  font-weight: 400;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: inherit;
   cursor: pointer;
 }
+.menu-toggle span { display: block; width: 24px; height: 1.5px; margin: 0 auto; background: var(--ink); transition: transform 0.25s; }
+.menu-toggle span + span { margin-top: 12px; }
+.menu-toggle[aria-expanded="true"] span:first-child { transform: translateY(6.75px) rotate(45deg); }
+.menu-toggle[aria-expanded="true"] span:last-child { transform: translateY(-6.75px) rotate(-45deg); }
 
-@media (max-width: 720px) {
-  .menu-toggle { display: block; }
-  .site-nav {
-    position: absolute;
-    top: var(--header-h);
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    gap: 0;
-    padding: 8px var(--gutter) 20px;
-    background: var(--paper);
-    border-bottom: 1px solid var(--line);
-    display: none;
-  }
-  .site-nav.open { display: flex; }
-  .site-nav a { padding: 14px 0; border-bottom: 1px solid var(--line); }
+.mobile-menu {
+  position: fixed;
+  inset: var(--header-h) 0 0 0;
+  z-index: 99;
+  padding: 24px var(--gutter);
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+}
+.mobile-menu[hidden] { display: none; }
+.mobile-menu a {
+  padding: 18px 0;
+  border-top: 1px solid var(--ink);
+  font-family: var(--serif);
+  font-size: 28px;
+  text-transform: none;
 }
 
 /* ---------- Hero ---------- */
 .hero {
-  min-height: 100svh;
-  padding: calc(var(--header-h) + clamp(48px, 10vh, 120px)) var(--gutter) clamp(28px, 5vh, 56px);
-  display: flex;
-  flex-direction: column;
-}
-
-.hero h1 {
-  margin-top: 24px;
-  max-width: 14ch;
-  font-family: var(--serif);
-  font-weight: 400;
-  font-size: clamp(52px, 10vw, 148px);
-  line-height: 0.95;
-  letter-spacing: -0.02em;
-  text-wrap: balance;
-}
-.hero h1 em { font-style: italic; }
-
-.hero-foot {
-  margin-top: auto;
-  padding-top: 48px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 32px;
-}
-
-.hero-intro { max-width: 46ch; color: var(--muted); }
-
-.scroll-cue {
-  flex: none;
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-}
-
-/* ---------- Steps: sticky stack ----------
-   Every step sticks just below the header, offset by the title bars of the
-   steps before it. Step N therefore slides up over step N-1 and docks under
-   its bar, so all earlier titles stay visible as a stack.                  */
-.step {
-  position: sticky;
-  top: calc(var(--header-h) + var(--i) * var(--bar-h));
-  height: calc(100svh - var(--header-h) - var(--i) * var(--bar-h));
-  min-height: calc(var(--bar-h) + 300px);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  background: var(--bg);
-  color: var(--fg, var(--ink));
-  border-top: 1px solid var(--rule, var(--line));
-}
-
-.step:nth-child(1) { --bg: var(--tone-0); }
-.step:nth-child(2) { --bg: var(--tone-1); }
-.step:nth-child(3) { --bg: var(--tone-2); }
-.step:nth-child(4) { --bg: var(--tone-3); --fg: #f6f1e8; --rule: rgba(255, 255, 255, 0.25); }
-.step:nth-child(5) { --bg: var(--tone-4); --fg: #f3efe8; --rule: rgba(255, 255, 255, 0.2); }
-
-.step-bar {
-  flex: none;
-  height: var(--bar-h);
-  padding: 0 var(--gutter);
+  height: 100svh;
+  padding: var(--header-h) var(--gutter) 0;
   display: flex;
   align-items: center;
-  gap: clamp(16px, 3vw, 40px);
+  justify-content: center;
+  gap: clamp(40px, 12vw, 200px);
 }
-
-.step-num {
-  font-size: 13px;
-  font-weight: 400;
-  letter-spacing: 0.16em;
-  font-variant-numeric: tabular-nums;
-  opacity: 0.7;
-}
-
-.step-title {
+.hero a {
   font-family: var(--serif);
-  font-weight: 400;
-  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 300;
+  font-size: clamp(34px, 5.4vw, 80px);
   line-height: 1;
+  letter-spacing: -0.01em;
 }
+.hero a:hover { font-style: italic; }
 
-.step-tag {
-  margin-left: auto;
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  opacity: 0.7;
-}
-
-.step-body {
-  flex: 1;
-  min-height: 0;
-  padding: clamp(16px, 3vh, 40px) var(--gutter) clamp(20px, 4vh, 48px);
+/* ---------- Process: intro left, stacking steps right ---------- */
+.process {
   display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-  gap: clamp(24px, 5vw, 80px);
-  border-top: 1px solid var(--rule, var(--line));
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  padding: var(--stack-top) var(--gutter) 56px;
+  margin-top: calc(-1 * var(--stack-top) + var(--header-h));
+  scroll-margin-top: 0;
 }
 
-.step-text {
+.process-intro {
+  position: sticky;
+  top: var(--stack-top);
+  max-width: 552px;
+  padding-top: 8px;
+}
+.process-intro .text-link { margin-top: 36px; }
+
+.steps {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 24px;
-  min-height: 0;
+  padding-left: var(--gutter);
 }
 
-.step-lead {
-  max-width: 30ch;
+/* Each step sticks one row lower than the one before it, so the next step
+   slides up over the previous description and docks under its title.
+   js/main.js adds margins so the finished stack scrolls away as one piece. */
+.step {
+  position: sticky;
+  top: calc(var(--stack-top) + var(--i) * var(--row));
+  display: grid;
+  grid-template-columns: 87px 1fr;
+  background: var(--paper);
+  border-top: 1px solid var(--ink);
+}
+.step-num {
+  padding-top: 16px;
+  font-size: 11.75px;
+  line-height: 1;
+}
+.step-title {
+  height: calc(var(--row) - 1px);
+  padding-top: 9px;
   font-family: var(--serif);
-  font-size: clamp(22px, 2.5vw, 34px);
-  line-height: 1.25;
-  text-wrap: pretty;
+  font-weight: 400;
+  font-size: 28.67px;
+  line-height: 43px;
+  letter-spacing: -0.005em;
+}
+.step-desc {
+  max-width: 468px;
+  padding: 6px 0 64px;
+  font-size: 14.17px;
+  line-height: 22.9px;
 }
 
-.step-list {
-  list-style: none;
-  padding: 0;
-  max-width: 420px;
-  font-size: 15px;
-}
-.step-list li {
-  padding: 9px 0;
-  border-top: 1px solid var(--rule, var(--line));
-}
-
-/* Neutral block standing in for a photo. Replace with <img> later. */
-.step-media {
-  min-height: 0;
+/* ---------- Image placeholders ---------- */
+.ph { position: absolute; inset: 0; background: var(--ph); }
+.ph::after {
+  content: "Image";
+  position: absolute;
+  inset: 0;
   display: grid;
   place-items: center;
-  background: color-mix(in srgb, var(--fg, var(--ink)) 10%, transparent);
-  outline: 1px solid var(--rule, var(--line));
-  outline-offset: -1px;
-}
-.step-media span {
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: 0.22em;
+  font-size: 11.75px;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  opacity: 0.55;
+  color: rgba(0, 0, 0, 0.35);
 }
-.step-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-@media (max-width: 720px) {
-  .step-tag { display: none; }
-  .step-body { grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); gap: 16px; }
-  .step-text { gap: 14px; }
-  .step-lead { font-size: 20px; }
-  .step-list { font-size: 14px; }
-  .step-list li { padding: 6px 0; }
-}
-
-/* Very short screens: let the steps scroll normally instead of stacking */
-@media (max-height: 560px) {
-  .step { position: static; height: auto; min-height: 0; }
-  .step-media { min-height: 180px; }
+.band, .tiles {
+  position: relative;
+  z-index: 1;
+  height: 100svh;
+  min-height: 520px;
+  color: #fff;
 }
 
-/* ---------- CTA ---------- */
-.cta {
-  position: relative; /* paints above the sticky stack as it scrolls away */
-  padding: clamp(96px, 18vh, 200px) var(--gutter);
-  text-align: center;
-  background: var(--paper);
+.quote {
+  position: absolute;
+  left: calc(var(--gutter) * 2);
+  bottom: 56px;
+  max-width: 680px;
 }
-.cta h2 {
-  margin: 20px 0 40px;
+.quote blockquote {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(40px, 6vw, 88px);
-  line-height: 1;
-  text-wrap: balance;
+  font-size: 28.67px;
+  line-height: 1.33;
+  text-indent: 2.8em;
 }
+.quote em { font-style: italic; font-weight: 300; }
+.quote figcaption { margin-top: 20px; font-size: 11.75px; font-weight: 500; }
 
-.button {
-  display: inline-block;
-  padding: 16px 36px;
-  border: 1px solid var(--ink);
-  font-size: 13px;
-  font-weight: 400;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  transition: background 0.2s, color 0.2s;
+.tiles { display: grid; grid-template-columns: 1fr 1fr; align-items: end; }
+.tiles a {
+  position: relative;
+  padding: 0 var(--gutter) 72px;
+  text-align: center;
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(34px, 3.2vw, 48px);
+  line-height: 1;
 }
-.button:hover { background: var(--ink); color: var(--paper); }
+.tiles a:hover { font-style: italic; }
+
+/* ---------- Contact ---------- */
+.contact {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 calc(var(--gutter) * 2);
+  padding: 120px var(--gutter) 96px;
+}
+.contact-intro { max-width: 552px; }
+.contact-intro .small { margin-top: 32px; max-width: 468px; }
+.contact-cols { display: grid; grid-template-columns: 1fr 1fr; gap: calc(var(--gutter) * 2); }
+.contact h2 {
+  margin-bottom: 28px;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 28.67px;
+  line-height: 1.2;
+}
+.details > div { padding: 14px 0; border-top: 1px solid var(--ink); }
+.details dt { margin-bottom: 8px; font-size: 11.75px; font-weight: 500; }
+.details dd { font-size: 13px; text-transform: uppercase; font-weight: 400; line-height: 1.5; }
+
+.enquire label { display: block; padding-top: 14px; border-top: 1px solid var(--ink); font-size: 11.75px; font-weight: 500; }
+.enquire input, .enquire textarea {
+  display: block;
+  width: 100%;
+  margin: 6px 0 10px;
+  padding: 4px 0;
+  border: 0;
+  background: transparent;
+  font: 400 15px/1.4 var(--sans);
+  color: inherit;
+  resize: vertical;
+}
+.enquire input:focus, .enquire textarea:focus { outline: none; background: rgba(0, 0, 0, 0.04); }
+.enquire button {
+  width: 100%;
+  padding: 16px 0;
+  border: 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  background: none;
+  color: inherit;
+  text-align: left;
+  font-family: inherit;
+  cursor: pointer;
+}
+.enquire button:hover { background: var(--ink); color: var(--paper); padding-left: 12px; }
 
 /* ---------- Footer ---------- */
 .site-footer {
-  position: relative;
-  padding: 56px var(--gutter) 28px;
-  background: var(--tone-4);
-  color: #f3efe8;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 40px;
-  font-size: 15px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px 24px;
+  flex-wrap: wrap;
+  padding: 24px var(--gutter) 28px;
+  font-size: 11.75px;
+  line-height: 1.4;
 }
-.footer-cols { display: flex; gap: clamp(28px, 5vw, 72px); flex-wrap: wrap; }
-.footer-cols a:hover { text-decoration: underline; }
-.fine { grid-column: 1 / -1; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, 0.2); font-size: 13px; opacity: 0.7; }
+.site-footer p { margin: 0; }
 
-@media (max-width: 720px) {
-  .site-footer { grid-template-columns: 1fr; }
+:focus-visible { outline: 1px solid currentColor; outline-offset: 4px; }
+
+/* ---------- Small screens: single column, steps in normal flow ---------- */
+@media (max-width: 991px), (max-height: 640px) {
+  :root { --header-h: 64px; --gutter: 20px; }
+  .site-header { grid-template-columns: 1fr auto; padding-top: 15px; }
+  .nav { display: none; }
+  .menu-toggle { display: block; }
+  .wordmark { font-size: 26px; }
+
+  .hero { flex-direction: column; gap: 28px; }
+  .hero a { font-size: 40px; }
+
+  .process { grid-template-columns: 1fr; margin-top: 0; padding: 40px var(--gutter) 24px; scroll-margin-top: var(--header-h); }
+  .process-intro { position: static; max-width: none; margin-bottom: 56px; }
+  .lead, .quote blockquote { font-size: 24px; text-indent: 1.6em; }
+  .steps { padding-left: 0; }
+  .step { position: static; grid-template-columns: 40px 1fr; margin: 0 !important; }
+  .step-title { font-size: 26px; }
+  .step-desc { padding-bottom: 48px; }
+
+  .band, .tiles { height: 80svh; }
+  .quote { left: var(--gutter); right: var(--gutter); bottom: 40px; }
+  .tiles a { padding-bottom: 48px; }
+
+  .contact { grid-template-columns: 1fr; padding: 72px var(--gutter) 56px; }
+  .contact-cols { margin-top: 64px; }
 }
-
-:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+@media (max-width: 640px) {
+  .contact-cols { grid-template-columns: 1fr; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
