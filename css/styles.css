@@ -1,0 +1,339 @@
+/* ---------- Tokens ---------- */
+:root {
+  --paper: #f3efe8;
+  --ink: #1f1c18;
+  --muted: #6f685e;
+  --line: rgba(31, 28, 24, 0.16);
+
+  /* One tone per step, light to dark */
+  --tone-0: #ebe5da;
+  --tone-1: #ddd3c3;
+  --tone-2: #c9bba6;
+  --tone-3: #8c7b66;
+  --tone-4: #2b2620;
+
+  --serif: "Cormorant Garamond", "Iowan Old Style", Georgia, serif;
+  --sans: "Jost", "Helvetica Neue", Arial, sans-serif;
+
+  --header-h: 72px;  /* fixed site header */
+  --bar-h: 64px;     /* title bar of each step that stays visible in the stack */
+  --gutter: clamp(20px, 4vw, 56px);
+}
+
+@media (max-width: 720px) {
+  :root {
+    --header-h: 60px;
+    --bar-h: 46px;
+  }
+}
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: var(--header-h); }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, p, ul { margin: 0; }
+a { color: inherit; text-decoration: none; }
+
+.eyebrow {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ---------- Header ---------- */
+.site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  height: var(--header-h);
+  padding: 0 var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+
+.wordmark {
+  font-family: var(--serif);
+  font-size: 24px;
+  letter-spacing: 0.04em;
+}
+
+.site-nav { display: flex; gap: clamp(20px, 3vw, 44px); }
+
+.site-nav a {
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 6px 0;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+.site-nav a:hover,
+.site-nav a[aria-current="page"] { border-bottom-color: currentColor; }
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: 0;
+  padding: 10px 0;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: inherit;
+  cursor: pointer;
+}
+
+@media (max-width: 720px) {
+  .menu-toggle { display: block; }
+  .site-nav {
+    position: absolute;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    padding: 8px var(--gutter) 20px;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    display: none;
+  }
+  .site-nav.open { display: flex; }
+  .site-nav a { padding: 14px 0; border-bottom: 1px solid var(--line); }
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  min-height: 100svh;
+  padding: calc(var(--header-h) + clamp(48px, 10vh, 120px)) var(--gutter) clamp(28px, 5vh, 56px);
+  display: flex;
+  flex-direction: column;
+}
+
+.hero h1 {
+  margin-top: 24px;
+  max-width: 14ch;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(52px, 10vw, 148px);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.hero h1 em { font-style: italic; }
+
+.hero-foot {
+  margin-top: auto;
+  padding-top: 48px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.hero-intro { max-width: 46ch; color: var(--muted); }
+
+.scroll-cue {
+  flex: none;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* ---------- Steps: sticky stack ----------
+   Every step sticks just below the header, offset by the title bars of the
+   steps before it. Step N therefore slides up over step N-1 and docks under
+   its bar, so all earlier titles stay visible as a stack.                  */
+.step {
+  position: sticky;
+  top: calc(var(--header-h) + var(--i) * var(--bar-h));
+  height: calc(100svh - var(--header-h) - var(--i) * var(--bar-h));
+  min-height: calc(var(--bar-h) + 300px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--fg, var(--ink));
+  border-top: 1px solid var(--rule, var(--line));
+}
+
+.step:nth-child(1) { --bg: var(--tone-0); }
+.step:nth-child(2) { --bg: var(--tone-1); }
+.step:nth-child(3) { --bg: var(--tone-2); }
+.step:nth-child(4) { --bg: var(--tone-3); --fg: #f6f1e8; --rule: rgba(255, 255, 255, 0.25); }
+.step:nth-child(5) { --bg: var(--tone-4); --fg: #f3efe8; --rule: rgba(255, 255, 255, 0.2); }
+
+.step-bar {
+  flex: none;
+  height: var(--bar-h);
+  padding: 0 var(--gutter);
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 3vw, 40px);
+}
+
+.step-num {
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.7;
+}
+
+.step-title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(24px, 3vw, 36px);
+  line-height: 1;
+}
+
+.step-tag {
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.step-body {
+  flex: 1;
+  min-height: 0;
+  padding: clamp(16px, 3vh, 40px) var(--gutter) clamp(20px, 4vh, 48px);
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(24px, 5vw, 80px);
+  border-top: 1px solid var(--rule, var(--line));
+}
+
+.step-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 0;
+}
+
+.step-lead {
+  max-width: 30ch;
+  font-family: var(--serif);
+  font-size: clamp(22px, 2.5vw, 34px);
+  line-height: 1.25;
+  text-wrap: pretty;
+}
+
+.step-list {
+  list-style: none;
+  padding: 0;
+  max-width: 420px;
+  font-size: 15px;
+}
+.step-list li {
+  padding: 9px 0;
+  border-top: 1px solid var(--rule, var(--line));
+}
+
+/* Neutral block standing in for a photo. Replace with <img> later. */
+.step-media {
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, var(--fg, var(--ink)) 10%, transparent);
+  outline: 1px solid var(--rule, var(--line));
+  outline-offset: -1px;
+}
+.step-media span {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+.step-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+@media (max-width: 720px) {
+  .step-tag { display: none; }
+  .step-body { grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); gap: 16px; }
+  .step-text { gap: 14px; }
+  .step-lead { font-size: 20px; }
+  .step-list { font-size: 14px; }
+  .step-list li { padding: 6px 0; }
+}
+
+/* Very short screens: let the steps scroll normally instead of stacking */
+@media (max-height: 560px) {
+  .step { position: static; height: auto; min-height: 0; }
+  .step-media { min-height: 180px; }
+}
+
+/* ---------- CTA ---------- */
+.cta {
+  position: relative; /* paints above the sticky stack as it scrolls away */
+  padding: clamp(96px, 18vh, 200px) var(--gutter);
+  text-align: center;
+  background: var(--paper);
+}
+.cta h2 {
+  margin: 20px 0 40px;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(40px, 6vw, 88px);
+  line-height: 1;
+  text-wrap: balance;
+}
+
+.button {
+  display: inline-block;
+  padding: 16px 36px;
+  border: 1px solid var(--ink);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: background 0.2s, color 0.2s;
+}
+.button:hover { background: var(--ink); color: var(--paper); }
+
+/* ---------- Footer ---------- */
+.site-footer {
+  position: relative;
+  padding: 56px var(--gutter) 28px;
+  background: var(--tone-4);
+  color: #f3efe8;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  font-size: 15px;
+}
+.footer-cols { display: flex; gap: clamp(28px, 5vw, 72px); flex-wrap: wrap; }
+.footer-cols a:hover { text-decoration: underline; }
+.fine { grid-column: 1 / -1; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, 0.2); font-size: 13px; opacity: 0.7; }
+
+@media (max-width: 720px) {
+  .site-footer { grid-template-columns: 1fr; }
+}
+
+:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
