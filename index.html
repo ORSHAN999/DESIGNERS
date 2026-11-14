@@ -102,6 +102,49 @@
       </div>
     </section>
 
+    <!-- Scroll-built image: the section stays pinned while scrolling fades
+         one stage into the next. Each stage is a pair of files (landscape and
+         portrait) taken from the same viewpoint. To change stages, swap the
+         files; to add one, add a <picture class="build-layer"> and a caption. -->
+    <section class="build" id="build" aria-label="From sketch to finished room">
+      <div class="build-pin">
+        <div class="build-layers graded">
+          <picture class="build-layer">
+            <source media="(orientation: portrait)" srcset="images/build-1-mobile.webp">
+            <img src="images/build-1-desktop.webp" alt="Line drawing of a kitchen with an island and a large window" width="2560" height="1440">
+          </picture>
+          <picture class="build-layer">
+            <source media="(orientation: portrait)" srcset="images/build-2-mobile.webp">
+            <img src="images/build-2-desktop.webp" alt="The same kitchen with materials and colour starting to appear" width="2560" height="1440" loading="lazy">
+          </picture>
+          <picture class="build-layer">
+            <source media="(orientation: portrait)" srcset="images/hero-3-mobile.webp">
+            <img src="images/hero-3-desktop.webp" alt="The finished cream kitchen with a veined stone island" width="3200" height="1800" loading="lazy">
+          </picture>
+        </div>
+        <div class="build-card">
+          <div class="build-captions">
+            <div class="build-caption is-active">
+              <span class="step-num">01</span>
+              <h3>It starts as a drawing.</h3>
+              <p>Every wall, cabinet and window is planned on paper before anything is ordered.</p>
+            </div>
+            <div class="build-caption">
+              <span class="step-num">02</span>
+              <h3>Then the materials arrive.</h3>
+              <p>Stone, finishes and light are chosen together, so you see how they sit side by side.</p>
+            </div>
+            <div class="build-caption">
+              <span class="step-num">03</span>
+              <h3>And it becomes your home.</h3>
+              <p>The finished room, exactly as you saw it in 3D.</p>
+            </div>
+          </div>
+          <div class="build-progress" aria-hidden="true"><span></span></div>
+        </div>
+      </div>
+    </section>
+
     <!-- Full-width image with a quote. Replace .ph with an <img>. -->
     <section class="band">
       <div class="ph" role="img" aria-label="Image placeholder"></div>

@@ -104,6 +104,39 @@ updateHeader();
 window.addEventListener('scroll', updateHeader, { passive: true });
 window.addEventListener('resize', updateHeader);
 
+// ---------- Scroll-built image ----------
+// Progress 0..1 across the pinned section drives a cross-fade through the
+// layers, the active caption and the progress line.
+const build = document.querySelector('.build');
+if (build) {
+  const layers = [...build.querySelectorAll('.build-layer')];
+  const captions = [...build.querySelectorAll('.build-caption')];
+  const bar = build.querySelector('.build-progress span');
+  const HOLD = 0.3; // share of each stage spent resting on a finished image
+  let ticking = false;
+
+  const renderBuild = () => {
+    ticking = false;
+    const travel = build.offsetHeight - window.innerHeight;
+    const p = Math.min(1, Math.max(0, -build.getBoundingClientRect().top / travel));
+    const pos = p * (layers.length - 1);
+    layers.forEach((layer, i) => {
+      if (i === 0) return;
+      const local = (pos - (i - 1) - HOLD / 2) / (1 - HOLD);
+      layer.style.opacity = Math.min(1, Math.max(0, local));
+    });
+    const active = Math.round(pos);
+    captions.forEach((c, i) => c.classList.toggle('is-active', i === active));
+    bar.style.transform = `scaleX(${p})`;
+  };
+  const requestBuild = () => {
+    if (!ticking) { ticking = true; requestAnimationFrame(renderBuild); }
+  };
+  window.addEventListener('scroll', requestBuild, { passive: true });
+  window.addEventListener('resize', requestBuild);
+  renderBuild();
+}
+
 // ---------- Enquiry form (not connected to a backend yet) ----------
 document.querySelector('.enquire').addEventListener('submit', (e) => {
   e.preventDefault();
