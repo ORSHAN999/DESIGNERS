@@ -152,14 +152,12 @@ a { color: inherit; text-decoration: none; }
 .slide {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
   opacity: 0;
   transform: scale(1.06);
   transition: opacity 1.8s ease, transform 9s linear;
 }
 .slide.is-active { opacity: 1; transform: scale(1); }
+.slide img { display: block; width: 100%; height: 100%; object-fit: cover; }
 /* Light scrim so the header and the two links stay readable on any photo */
 .hero::after {
   content: "";

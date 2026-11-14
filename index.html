@@ -37,11 +37,17 @@
   <main>
 
     <section class="hero">
-      <!-- Slideshow. Add or remove <img class="slide"> lines freely; every
-           image gets the same colour treatment from .graded in the CSS. -->
+      <!-- Slideshow. Each slide has a landscape file (2560x1440, computers)
+           and a portrait file (1080x1920, phones). Every image gets the same colour treatment from .graded in the CSS. -->
       <div class="slides graded">
-        <img class="slide is-active" src="images/hero-1.webp" alt="Kitchen with a stone waterfall island and warm wood cabinetry" style="object-position: 50% 62%">
-        <img class="slide" src="images/hero-2.webp" alt="Stone farmhouse sink below a black-framed window with a desert view" style="object-position: 50% 52%">
+        <picture class="slide is-active">
+          <source media="(orientation: portrait)" srcset="images/hero-1-mobile.webp">
+          <img src="images/hero-1-desktop.webp" alt="Kitchen with a stone waterfall island and warm wood cabinetry" width="2560" height="1440">
+        </picture>
+        <picture class="slide">
+          <source media="(orientation: portrait)" srcset="images/hero-2-mobile.webp">
+          <img src="images/hero-2-desktop.webp" alt="Stone farmhouse sink below a black-framed window with a desert view" width="2560" height="1440">
+        </picture>
       </div>
       <a href="#architecture">Architecture</a>
       <a href="#interiors">Interior Design</a>
