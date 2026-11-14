@@ -51,16 +51,42 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(fa
 stackQuery.addEventListener('change', () => setMenu(false));
 
 // ---------- Hero slideshow ----------
+// With a mouse: the image changes as the pointer moves across the hero
+// (one change per MOVE_PX of travel). On touch screens, where there is no
+// pointer to move, the images change on a timer instead.
 const slides = [...document.querySelectorAll('.hero .slide')];
-const SLIDE_MS = 5500;
+const heroEl = document.querySelector('.hero');
+const MOVE_PX = 160;     // pointer travel needed for the next image
+const MIN_GAP_MS = 700;  // shortest time between two changes
+const TOUCH_MS = 5500;   // timer on touch screens
+let current = 0;
+
+function nextSlide() {
+  slides[current].classList.remove('is-active');
+  current = (current + 1) % slides.length;
+  slides[current].classList.add('is-active');
+}
+
 if (slides.length > 1) {
-  let current = 0;
-  setInterval(() => {
-    if (document.hidden) return;
-    slides[current].classList.remove('is-active');
-    current = (current + 1) % slides.length;
-    slides[current].classList.add('is-active');
-  }, SLIDE_MS);
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    let last = null;
+    let travelled = 0;
+    let lastChange = 0;
+    heroEl.addEventListener('pointermove', (e) => {
+      if (e.pointerType !== 'mouse') return;
+      if (last) travelled += Math.hypot(e.clientX - last.x, e.clientY - last.y);
+      last = { x: e.clientX, y: e.clientY };
+      const now = performance.now();
+      if (travelled >= MOVE_PX && now - lastChange >= MIN_GAP_MS) {
+        travelled = 0;
+        lastChange = now;
+        nextSlide();
+      }
+    });
+    heroEl.addEventListener('pointerleave', () => { last = null; });
+  } else {
+    setInterval(() => { if (!document.hidden) nextSlide(); }, TOUCH_MS);
+  }
 }
 
 // Header is clear while it sits over the hero, solid afterwards
