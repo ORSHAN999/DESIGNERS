@@ -51,42 +51,47 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(fa
 stackQuery.addEventListener('change', () => setMenu(false));
 
 // ---------- Hero slideshow ----------
-// With a mouse: the image changes as the pointer moves across the hero
-// (one change per MOVE_PX of travel). On touch screens, where there is no
-// pointer to move, the images change on a timer instead.
+// The image changes on three things only:
+//   1. the pointer lands on (or a click hits) the studio name,
+//   2. the pointer moves onto a different menu item or hero category,
+//   3. the visitor starts scrolling down from the top of the page.
+// Touch screens have no pointer, so there the images also change on a timer.
 const slides = [...document.querySelectorAll('.hero .slide')];
 const heroEl = document.querySelector('.hero');
-const MOVE_PX = 160;     // pointer travel needed for the next image
-const MIN_GAP_MS = 700;  // shortest time between two changes
-const TOUCH_MS = 5500;   // timer on touch screens
+const TOUCH_MS = 5500;
 let current = 0;
 
 function nextSlide() {
+  if (slides.length < 2) return;
   slides[current].classList.remove('is-active');
   current = (current + 1) % slides.length;
   slides[current].classList.add('is-active');
 }
+const heroInView = () => window.scrollY < heroEl.offsetHeight;
 
-if (slides.length > 1) {
-  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    let last = null;
-    let travelled = 0;
-    let lastChange = 0;
-    heroEl.addEventListener('pointermove', (e) => {
-      if (e.pointerType !== 'mouse') return;
-      if (last) travelled += Math.hypot(e.clientX - last.x, e.clientY - last.y);
-      last = { x: e.clientX, y: e.clientY };
-      const now = performance.now();
-      if (travelled >= MOVE_PX && now - lastChange >= MIN_GAP_MS) {
-        travelled = 0;
-        lastChange = now;
-        nextSlide();
-      }
-    });
-    heroEl.addEventListener('pointerleave', () => { last = null; });
-  } else {
-    setInterval(() => { if (!document.hidden) nextSlide(); }, TOUCH_MS);
-  }
+// 1 + 2: studio name, menu items, hero categories
+const triggers = [...document.querySelectorAll('.wordmark, .site-header .nav a, .hero > a')];
+let lastTrigger = null;
+triggers.forEach((el) => {
+  el.addEventListener('pointerenter', (e) => {
+    if (e.pointerType !== 'mouse' || el === lastTrigger || !heroInView()) return;
+    lastTrigger = el;
+    nextSlide();
+  });
+});
+document.querySelector('.wordmark').addEventListener('click', () => {
+  if (heroInView()) nextSlide();
+});
+
+// 3: one change when scrolling down from the top; re-armed back at the top
+let scrollArmed = window.scrollY <= 8;
+window.addEventListener('scroll', () => {
+  if (scrollArmed && window.scrollY > 8) { scrollArmed = false; nextSlide(); }
+  else if (window.scrollY <= 8) scrollArmed = true;
+}, { passive: true });
+
+if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  setInterval(() => { if (!document.hidden && heroInView()) nextSlide(); }, TOUCH_MS);
 }
 
 // Header is clear while it sits over the hero, solid afterwards
