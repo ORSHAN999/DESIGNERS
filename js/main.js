@@ -105,8 +105,8 @@ window.addEventListener('scroll', updateHeader, { passive: true });
 window.addEventListener('resize', updateHeader);
 
 // ---------- Scroll-built image ----------
-// Progress 0..1 across the pinned section drives a cross-fade through the
-// layers, the active caption and the progress line.
+// Progress 0..1 across the pinned section drives the reveal of each
+// layer over the one before it, the active caption and the progress line.
 const build = document.querySelector('.build');
 if (build) {
   const layers = [...build.querySelectorAll('.build-layer')];
@@ -123,7 +123,7 @@ if (build) {
     layers.forEach((layer, i) => {
       if (i === 0) return;
       const local = (pos - (i - 1) - HOLD / 2) / (1 - HOLD);
-      layer.style.opacity = Math.min(1, Math.max(0, local));
+      layer.style.setProperty('--r', Math.min(1, Math.max(0, local)).toFixed(4));
     });
     const active = Math.round(pos);
     captions.forEach((c, i) => c.classList.toggle('is-active', i === active));

@@ -239,7 +239,7 @@ a { color: inherit; text-decoration: none; }
 .build {
   position: relative;
   z-index: 1;
-  height: 340vh;
+  height: 440vh;
   background: var(--paper);
 }
 .build-pin {
@@ -249,8 +249,15 @@ a { color: inherit; text-decoration: none; }
   overflow: hidden;
 }
 .build-layers { position: absolute; inset: 0; }
-.build-layer { position: absolute; inset: 0; will-change: opacity; }
-.build-layer + .build-layer { opacity: 0; }
+.build-layer { position: absolute; inset: 0; }
+/* Each later stage is revealed by a soft-edged sweep rising from the floor.
+   --r runs 0..1 and is set from the scroll position in js/main.js. */
+.build-layer + .build-layer {
+  --r: 0;
+  --edge: 22%;
+  -webkit-mask-image: linear-gradient(8deg, #000 calc(var(--r) * (100% + var(--edge)) - var(--edge)), transparent calc(var(--r) * (100% + var(--edge))));
+  mask-image: linear-gradient(8deg, #000 calc(var(--r) * (100% + var(--edge)) - var(--edge)), transparent calc(var(--r) * (100% + var(--edge))));
+}
 .build-layer img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 .build-card {
@@ -415,7 +422,7 @@ a { color: inherit; text-decoration: none; }
   .step-desc { padding-bottom: 48px; }
 
   .band, .tiles { height: 80svh; }
-  .build { height: 300vh; }
+  .build { height: 380vh; }
   .build-caption h3 { font-size: 24px; }
   .quote { left: var(--gutter); right: var(--gutter); bottom: 40px; }
   .tiles a { padding-bottom: 48px; }

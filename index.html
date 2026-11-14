@@ -102,6 +102,58 @@
       </div>
     </section>
 
+    <!-- Scroll-built room: the section stays pinned while scrolling reveals
+         one construction stage over the previous one. Each stage is a pair of
+         files (landscape and portrait) from the same viewpoint. To add a
+         stage, add a <picture class="build-layer"> and a caption. -->
+    <section class="build" id="build" aria-label="A kitchen from bare room to finished">
+      <div class="build-pin">
+        <div class="build-layers graded">
+          <picture class="build-layer">
+            <source media="(orientation: portrait)" srcset="images/build-1-mobile.webp">
+            <img src="images/build-1-desktop.webp" alt="Bare walls and concrete floor of an empty room with a large window" width="2560" height="1440">
+          </picture>
+          <picture class="build-layer">
+            <source media="(orientation: portrait)" srcset="images/build-2-mobile.webp">
+            <img src="images/build-2-desktop.webp" alt="Unfinished plywood cabinet boxes and an island frame installed on a new wood floor" width="2560" height="1440" loading="lazy">
+          </picture>
+          <picture class="build-layer">
+            <source media="(orientation: portrait)" srcset="images/build-3-mobile.webp">
+            <img src="images/build-3-desktop.webp" alt="Cream cabinets with stone countertops and backsplash, before hardware and lighting" width="2560" height="1440" loading="lazy">
+          </picture>
+          <picture class="build-layer">
+            <source media="(orientation: portrait)" srcset="images/build-4-mobile.webp">
+            <img src="images/build-4-desktop.webp" alt="Finished cream kitchen with brass hardware, wall lights and a range" width="2560" height="1440" loading="lazy">
+          </picture>
+        </div>
+        <div class="build-card">
+          <div class="build-captions">
+            <div class="build-caption is-active">
+              <span class="step-num">01</span>
+              <h3>Bare room</h3>
+              <p>Every project starts here: an empty space, measured and planned down to the last inch.</p>
+            </div>
+            <div class="build-caption">
+              <span class="step-num">02</span>
+              <h3>Cabinetry</h3>
+              <p>Cabinet boxes and the island go in, exactly where the 3D plan placed them.</p>
+            </div>
+            <div class="build-caption">
+              <span class="step-num">03</span>
+              <h3>Stone &amp; finishes</h3>
+              <p>Doors, countertops and backsplash follow, in the materials you approved.</p>
+            </div>
+            <div class="build-caption">
+              <span class="step-num">04</span>
+              <h3>Finished</h3>
+              <p>Hardware, lighting and fixtures complete the room you saw before it was built.</p>
+            </div>
+          </div>
+          <div class="build-progress" aria-hidden="true"><span></span></div>
+        </div>
+      </div>
+    </section>
+
     <!-- Full-width image with a quote. Replace .ph with an <img>. -->
     <section class="band">
       <div class="ph" role="img" aria-label="Image placeholder"></div>
