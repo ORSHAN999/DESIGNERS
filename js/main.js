@@ -43,11 +43,35 @@ function setMenu(open) {
   menu.hidden = !open;
   toggle.setAttribute('aria-expanded', String(open));
   document.body.style.overflow = open ? 'hidden' : '';
+  document.body.classList.toggle('menu-open', open);
 }
 toggle.addEventListener('click', () => setMenu(menu.hidden));
 menu.addEventListener('click', (e) => { if (e.target.closest('a')) setMenu(false); });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
 stackQuery.addEventListener('change', () => setMenu(false));
+
+// ---------- Hero slideshow ----------
+const slides = [...document.querySelectorAll('.hero .slide')];
+const SLIDE_MS = 5500;
+if (slides.length > 1) {
+  let current = 0;
+  setInterval(() => {
+    if (document.hidden) return;
+    slides[current].classList.remove('is-active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('is-active');
+  }, SLIDE_MS);
+}
+
+// Header is clear while it sits over the hero, solid afterwards
+const header = document.querySelector('.site-header');
+const hero = document.querySelector('.hero');
+function updateHeader() {
+  header.classList.toggle('over-hero', window.scrollY < hero.offsetHeight - header.offsetHeight);
+}
+updateHeader();
+window.addEventListener('scroll', updateHeader, { passive: true });
+window.addEventListener('resize', updateHeader);
 
 // ---------- Enquiry form (not connected to a backend yet) ----------
 document.querySelector('.enquire').addEventListener('submit', (e) => {
