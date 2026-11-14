@@ -104,16 +104,55 @@ updateHeader();
 window.addEventListener('scroll', updateHeader, { passive: true });
 window.addEventListener('resize', updateHeader);
 
-// ---------- Scroll-built image ----------
-// Progress 0..1 across the pinned section drives the reveal of each
-// layer over the one before it, the active caption and the progress line.
+// ---------- Scroll-built room ----------
+// Progress 0..1 across the pinned section drives the reveal of each layer
+// over the one before it, the active caption, the progress line and the
+// leader line that points from the caption card to the relevant part.
 const build = document.querySelector('.build');
 if (build) {
+  const pin = build.querySelector('.build-pin');
   const layers = [...build.querySelectorAll('.build-layer')];
   const captions = [...build.querySelectorAll('.build-caption')];
   const bar = build.querySelector('.build-progress span');
+  const card = build.querySelector('.build-card');
+  const leader = build.querySelector('.build-leader');
+  const line = leader.querySelector('line');
+  const dot = leader.querySelector('circle');
   const HOLD = 0.3; // share of each stage spent resting on a finished image
   let ticking = false;
+  let shown = -1;
+
+  // Where a point of the photo lands on screen, given object-fit: cover
+  const targetPoint = (caption) => {
+    const img = layers[0].querySelector('img');
+    const portrait = window.matchMedia('(orientation: portrait)').matches;
+    const fx = parseFloat(portrait ? caption.dataset.mx : caption.dataset.x);
+    const fy = parseFloat(portrait ? caption.dataset.my : caption.dataset.y);
+    const iw = img.naturalWidth || 16;
+    const ih = img.naturalHeight || 9;
+    const cw = pin.clientWidth;
+    const chh = pin.clientHeight;
+    const scale = Math.max(cw / iw, chh / ih);
+    return { x: (cw - iw * scale) / 2 + fx * iw * scale, y: (chh - ih * scale) / 2 + fy * ih * scale };
+  };
+
+  const drawLeader = (index, animate) => {
+    const t = targetPoint(captions[index]);
+    const left = card.offsetLeft;
+    const right = left + card.offsetWidth;
+    const x1 = Math.min(right, Math.max(left + 24, t.x));
+    const y1 = card.offsetTop;
+    const visible = t.y < y1 - 8; // hide if the target sits behind the card
+    line.setAttribute('x1', x1); line.setAttribute('y1', y1);
+    line.setAttribute('x2', t.x); line.setAttribute('y2', t.y);
+    dot.setAttribute('cx', t.x); dot.setAttribute('cy', t.y);
+    leader.style.visibility = visible ? '' : 'hidden';
+    if (animate) {
+      leader.classList.remove('is-drawn');
+      void leader.getBoundingClientRect(); // restart the draw animation
+    }
+    leader.classList.add('is-drawn');
+  };
 
   const renderBuild = () => {
     ticking = false;
@@ -126,14 +165,19 @@ if (build) {
       layer.style.setProperty('--r', Math.min(1, Math.max(0, local)).toFixed(4));
     });
     const active = Math.round(pos);
-    captions.forEach((c, i) => c.classList.toggle('is-active', i === active));
+    if (active !== shown) {
+      captions.forEach((c, i) => c.classList.toggle('is-active', i === active));
+      drawLeader(active, true);
+      shown = active;
+    }
     bar.style.transform = `scaleX(${p})`;
   };
   const requestBuild = () => {
     if (!ticking) { ticking = true; requestAnimationFrame(renderBuild); }
   };
   window.addEventListener('scroll', requestBuild, { passive: true });
-  window.addEventListener('resize', requestBuild);
+  window.addEventListener('resize', () => { if (shown >= 0) drawLeader(shown, false); requestBuild(); });
+  layers[0].querySelector('img').addEventListener('load', () => { if (shown >= 0) drawLeader(shown, false); });
   renderBuild();
 }
 

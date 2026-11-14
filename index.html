@@ -123,39 +123,35 @@
           </picture>
           <picture class="build-layer">
             <source media="(orientation: portrait)" srcset="images/build-4-mobile.webp">
-            <img src="images/build-4-desktop.webp" alt="Cream kitchen with brass hardware, wall lights and a range installed" width="2560" height="1440" loading="lazy">
-          </picture>
-          <picture class="build-layer">
-            <source media="(orientation: portrait)" srcset="images/build-5-mobile.webp">
-            <img src="images/build-5-desktop.webp" alt="The finished kitchen with four bar stools at the island" width="2560" height="1440" loading="lazy">
+            <img src="images/build-4-desktop.webp" alt="The finished cream kitchen with brass fixtures, wall lights and bar stools at the island" width="2560" height="1440" loading="lazy">
           </picture>
         </div>
+        <!-- Leader line from the caption card to the part of the room the
+             current stage is about. The target of each stage is set on its
+             caption: data-x / data-y are fractions of the landscape image,
+             data-mx / data-my of the portrait one. -->
+        <svg class="build-leader" aria-hidden="true"><line pathLength="1"></line><circle r="4.5"></circle></svg>
         <div class="build-card">
           <div class="build-captions">
-            <div class="build-caption is-active">
+            <div class="build-caption is-active" data-x="0.5" data-y="0.47" data-mx="0.5" data-my="0.47">
               <span class="step-num">01</span>
               <h3>Bare room</h3>
               <p>Every project starts here: an empty space, measured and planned down to the last inch.</p>
             </div>
-            <div class="build-caption">
+            <div class="build-caption" data-x="0.50" data-y="0.62" data-mx="0.46" data-my="0.60">
               <span class="step-num">02</span>
               <h3>Cabinetry</h3>
               <p>Cabinet boxes and the island go in, exactly where the 3D plan placed them.</p>
             </div>
-            <div class="build-caption">
+            <div class="build-caption" data-x="0.38" data-y="0.48" data-mx="0.46" data-my="0.48">
               <span class="step-num">03</span>
               <h3>Stone &amp; finishes</h3>
               <p>Doors, countertops and backsplash follow, in the materials you approved.</p>
             </div>
-            <div class="build-caption">
+            <div class="build-caption" data-x="0.55" data-y="0.3" data-mx="0.87" data-my="0.3">
               <span class="step-num">04</span>
-              <h3>Fixtures &amp; lighting</h3>
-              <p>Hardware, faucets, the range and the wall lights are fitted, one detail at a time.</p>
-            </div>
-            <div class="build-caption">
-              <span class="step-num">05</span>
               <h3>Finished</h3>
-              <p>The room you saw in 3D before it was built, ready to live in.</p>
+              <p>Fixtures, lighting and furniture complete the room you saw in 3D before it was built.</p>
             </div>
           </div>
           <div class="build-progress" aria-hidden="true"><span></span></div>
