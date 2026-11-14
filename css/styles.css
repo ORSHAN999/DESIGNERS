@@ -320,7 +320,7 @@ a { color: inherit; text-decoration: none; }
 }
 .ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-.band, .tiles {
+.band {
   position: relative;
   z-index: 1;
   height: 100svh;
@@ -344,16 +344,43 @@ a { color: inherit; text-decoration: none; }
 .quote em { font-style: italic; font-weight: 300; }
 .quote figcaption { margin-top: 20px; font-size: 11.75px; font-weight: 500; }
 
-.tiles { display: grid; grid-template-columns: 1fr 1fr; align-items: end; }
-.tiles a {
+/* ---------- Projects ---------- */
+.projects {
   position: relative;
-  padding: 0 var(--gutter) 72px;
-  text-align: center;
-  font-family: var(--serif);
-  font-weight: 300;
-  font-size: clamp(34px, 3.2vw, 48px);
-  line-height: 1;
+  z-index: 1;
+  padding: 120px var(--gutter) 96px;
+  background: var(--paper);
+  scroll-margin-top: var(--header-h);
 }
+.projects-head { max-width: 552px; margin-bottom: 64px; }
+.project-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+.project {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: center;
+  cursor: pointer;
+}
+.project-media { aspect-ratio: 5 / 7; background: var(--ph); }
+.project-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+}
+.project-frame.is-active { opacity: 1; }
+.project-frame.ph { background: var(--tone, var(--ph)); }
+.project-dots { display: flex; justify-content: center; gap: 6px; margin-top: 18px; }
+.project-dots span { width: 18px; height: 1px; background: var(--ink); opacity: 0.25; transition: opacity 0.3s; }
+.project-dots span.is-active { opacity: 1; }
+.project-label { margin-top: 16px; font-size: 11.75px; font-weight: 500; line-height: 1; text-transform: uppercase; }
+.project-title { margin-top: 10px; font-family: var(--serif); font-weight: 400; font-size: 28.67px; line-height: 1.2; letter-spacing: -0.005em; }
 
 /* ---------- Contact ---------- */
 .contact {
@@ -436,17 +463,23 @@ a { color: inherit; text-decoration: none; }
   .step-title { font-size: 26px; }
   .step-desc { padding-bottom: 48px; }
 
-  .band, .tiles { height: 80svh; }
+  .band { height: 80svh; }
   .build { height: 380vh; }
   .build-caption h3 { font-size: 24px; }
   .quote { left: var(--gutter); right: var(--gutter); bottom: 40px; }
-  .tiles a { padding-bottom: 48px; }
 
+  .projects { padding: 72px var(--gutter) 64px; }
+  .projects-head { margin-bottom: 40px; }
   .contact { grid-template-columns: 1fr; padding: 72px var(--gutter) 56px; }
   .contact-cols { margin-top: 64px; }
 }
 @media (max-width: 640px) {
   .contact-cols { grid-template-columns: 1fr; }
+  /* Cards become a swipeable row */
+  .project-row { display: flex; gap: 14px; margin: 0 calc(-1 * var(--gutter)); padding: 0 var(--gutter); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .project-row::-webkit-scrollbar { display: none; }
+  .project { flex: 0 0 76%; scroll-snap-align: center; }
+  .project-title { font-size: 24px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

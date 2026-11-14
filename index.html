@@ -156,7 +156,7 @@
     </section>
 
     <!-- Full-width image with a quote. Replace .ph with an <img>. -->
-    <section class="band">
+    <section class="band" id="practice">
       <div class="ph" role="img" aria-label="Image placeholder"></div>
       <figure class="quote">
         <blockquote>&ldquo;Every project here is <em>a partnership.</em> Our ideas grow together until they reflect you and the place you call home.&rdquo;</blockquote>
@@ -164,11 +164,47 @@
       </figure>
     </section>
 
-    <!-- Full-width image with two large links. Replace .ph with an <img>. -->
-    <section class="tiles" id="practice">
-      <div class="ph" role="img" aria-label="Image placeholder"></div>
-      <a href="#practice">Practice</a>
-      <a href="#projects" id="projects">Projects</a>
+    <!-- Projects: three category cards. Hovering a card (or tapping it) steps
+         through its images; the small label under the image names the style
+         of the image on show. To fill a placeholder, replace its
+         <div class="project-frame ph"> with an <img class="project-frame">. -->
+    <section class="projects" id="projects">
+      <div class="projects-head">
+        <p class="eyebrow">Projects</p>
+        <p class="lead">Every home asks for something different. Here are a few of the directions we design in.</p>
+      </div>
+      <div class="project-row">
+        <button class="project" type="button" aria-label="Kitchens: show next image">
+          <div class="project-media graded">
+              <img class="project-frame is-active" src="images/hero-1-mobile.webp" alt="Modern kitchen with a stone island and wood cabinetry" data-label="Modern" loading="lazy">
+              <img class="project-frame" src="images/build-4-mobile.webp" alt="Classic cream kitchen with a veined stone island" data-label="Classic" loading="lazy">
+              <img class="project-frame" src="images/hero-2-mobile.webp" alt="Stone farmhouse sink below a black-framed window" data-label="Warm traditional" loading="lazy">
+          </div>
+          <div class="project-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+          <p class="project-label">Modern</p>
+          <h3 class="project-title">Kitchens</h3>
+        </button>
+        <button class="project" type="button" aria-label="Bathrooms: show next image">
+          <div class="project-media graded">
+              <div class="project-frame ph is-active" style="--tone:#c9c2b8" role="img" aria-label="Image placeholder" data-label="Modern"></div>
+              <div class="project-frame ph" style="--tone:#bdb3a6" role="img" aria-label="Image placeholder" data-label="Classic"></div>
+              <div class="project-frame ph" style="--tone:#aea597" role="img" aria-label="Image placeholder" data-label="Spa"></div>
+          </div>
+          <div class="project-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+          <p class="project-label">Modern</p>
+          <h3 class="project-title">Bathrooms</h3>
+        </button>
+        <button class="project" type="button" aria-label="Living spaces: show next image">
+          <div class="project-media graded">
+              <div class="project-frame ph is-active" style="--tone:#c4bcb0" role="img" aria-label="Image placeholder" data-label="Modern"></div>
+              <div class="project-frame ph" style="--tone:#b5ab9d" role="img" aria-label="Image placeholder" data-label="Classic"></div>
+              <div class="project-frame ph" style="--tone:#a89c8c" role="img" aria-label="Image placeholder" data-label="Desert contemporary"></div>
+          </div>
+          <div class="project-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+          <p class="project-label">Modern</p>
+          <h3 class="project-title">Living spaces</h3>
+        </button>
+      </div>
     </section>
 
     <section class="contact" id="contact">
