@@ -155,46 +155,60 @@
       </figure>
     </section>
 
-    <!-- Portfolio: three category cards. Hovering a card (or tapping it) steps
-         through its images; the small label under the image names the style
-         of the image on show. To fill a placeholder, replace its
-         <div class="project-frame ph"> with an <img class="project-frame">. -->
+    <!-- Portfolio: one card per image, with a small label (room and style)
+         and a title. Upright images sit three to a row; add the class
+         project--wide for a landscape image, which sits two to a row. -->
     <section class="projects" id="portfolio">
       <div class="projects-head">
         <p class="eyebrow">Portfolio</p>
         <p class="lead">Every home asks for something different. Here are a few of the directions we design in.</p>
       </div>
       <div class="project-row">
-        <button class="project" type="button" aria-label="Kitchens: show next image">
+        <figure class="project">
           <div class="project-media graded">
-              <img class="project-frame is-active" src="images/hero-1-mobile.webp" alt="Modern kitchen with a stone island and wood cabinetry" data-label="Modern" loading="lazy">
-              <img class="project-frame" src="images/kitchen-classic.webp" alt="Classic cream kitchen with a veined stone island" data-label="Classic" loading="lazy">
-              <img class="project-frame" src="images/hero-2-mobile.webp" alt="Stone farmhouse sink below a black-framed window" data-label="Warm traditional" loading="lazy">
+            <img src="images/portfolio-1.webp" alt="Kitchen with a rounded oak island, veined marble and a sculpted plaster hood" width="1200" height="1680" loading="lazy">
           </div>
-          <div class="project-dots" aria-hidden="true"><span></span><span></span><span></span></div>
-          <p class="project-label">Modern</p>
-          <h3 class="project-title">Kitchens</h3>
-        </button>
-        <button class="project" type="button" aria-label="Bathrooms: show next image">
+          <figcaption>
+            <p class="project-label">Kitchen &middot; Organic modern</p>
+            <h3 class="project-title">The Curved Oak Kitchen</h3>
+          </figcaption>
+        </figure>
+        <figure class="project">
           <div class="project-media graded">
-              <div class="project-frame ph is-active" style="--tone:#c9c2b8" role="img" aria-label="Image placeholder" data-label="Modern"></div>
-              <div class="project-frame ph" style="--tone:#bdb3a6" role="img" aria-label="Image placeholder" data-label="Classic"></div>
-              <div class="project-frame ph" style="--tone:#aea597" role="img" aria-label="Image placeholder" data-label="Spa"></div>
+            <img src="images/portfolio-2.webp" alt="Fireplace wrapped in bold veined stone with lit floating shelves beside it" width="1200" height="1680" loading="lazy">
           </div>
-          <div class="project-dots" aria-hidden="true"><span></span><span></span><span></span></div>
-          <p class="project-label">Modern</p>
-          <h3 class="project-title">Bathrooms</h3>
-        </button>
-        <button class="project" type="button" aria-label="Living spaces: show next image">
+          <figcaption>
+            <p class="project-label">Living room &middot; Fireplace</p>
+            <h3 class="project-title">The Stone Hearth</h3>
+          </figcaption>
+        </figure>
+        <figure class="project">
           <div class="project-media graded">
-              <div class="project-frame ph is-active" style="--tone:#c4bcb0" role="img" aria-label="Image placeholder" data-label="Modern"></div>
-              <div class="project-frame ph" style="--tone:#b5ab9d" role="img" aria-label="Image placeholder" data-label="Classic"></div>
-              <div class="project-frame ph" style="--tone:#a89c8c" role="img" aria-label="Image placeholder" data-label="Desert contemporary"></div>
+            <img src="images/portfolio-3.webp" alt="Kitchen with bronze pendant lights, a farmhouse sink under a garden window and an oak island" width="1200" height="1680" loading="lazy">
           </div>
-          <div class="project-dots" aria-hidden="true"><span></span><span></span><span></span></div>
-          <p class="project-label">Modern</p>
-          <h3 class="project-title">Living spaces</h3>
-        </button>
+          <figcaption>
+            <p class="project-label">Kitchen &middot; Modern farmhouse</p>
+            <h3 class="project-title">The Garden Kitchen</h3>
+          </figcaption>
+        </figure>
+        <figure class="project project--wide">
+          <div class="project-media graded">
+            <img src="images/portfolio-4.webp" alt="Classic ivory kitchen with brass lanterns, glass-front cabinets and a marble island" width="1800" height="1200" loading="lazy">
+          </div>
+          <figcaption>
+            <p class="project-label">Kitchen &middot; Classic</p>
+            <h3 class="project-title">The Ivory Kitchen</h3>
+          </figcaption>
+        </figure>
+        <figure class="project project--wide">
+          <div class="project-media graded">
+            <img src="images/portfolio-5.webp" alt="Light oak kitchen with a stone waterfall island and steel-framed doors to a garden" width="1800" height="1200" loading="lazy">
+          </div>
+          <figcaption>
+            <p class="project-label">Kitchen &middot; Warm contemporary</p>
+            <h3 class="project-title">The Courtyard Kitchen</h3>
+          </figcaption>
+        </figure>
       </div>
     </section>
 

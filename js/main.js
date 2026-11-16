@@ -187,38 +187,6 @@ if (build) {
   renderBuild();
 }
 
-// ---------- Project cards ----------
-// Each card steps through its images: automatically while the pointer rests
-// on it, and once per click or tap. The label names the image on show.
-document.querySelectorAll('.project').forEach((card) => {
-  const frames = [...card.querySelectorAll('.project-frame')];
-  const dots = [...card.querySelectorAll('.project-dots span')];
-  const label = card.querySelector('.project-label');
-  const HOVER_MS = 1600;
-  let index = 0;
-  let timer = null;
-
-  const show = (i) => {
-    index = (i + frames.length) % frames.length;
-    frames.forEach((f, k) => f.classList.toggle('is-active', k === index));
-    dots.forEach((d, k) => d.classList.toggle('is-active', k === index));
-    label.textContent = frames[index].dataset.label;
-  };
-  const stop = () => { clearInterval(timer); timer = null; };
-
-  show(0);
-  card.addEventListener('click', () => {
-    show(index + 1);
-    if (timer) { stop(); timer = setInterval(() => show(index + 1), HOVER_MS); }
-  });
-  card.addEventListener('pointerenter', (e) => {
-    if (e.pointerType !== 'mouse' || timer) return;
-    show(index + 1);
-    timer = setInterval(() => show(index + 1), HOVER_MS);
-  });
-  card.addEventListener('pointerleave', stop);
-});
-
 // ---------- Enquiry form (not connected to a backend yet) ----------
 document.querySelector('.enquire').addEventListener('submit', (e) => {
   e.preventDefault();
