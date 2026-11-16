@@ -187,6 +187,19 @@ if (build) {
   renderBuild();
 }
 
+// ---------- Portfolio cards rise in on scroll ----------
+if ('IntersectionObserver' in window) {
+  const cards = document.querySelectorAll('.project');
+  const seen = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-in');
+      seen.unobserve(entry.target);
+    });
+  }, { rootMargin: '0px 0px -8% 0px' });
+  cards.forEach((card) => { card.classList.add('reveal'); seen.observe(card); });
+}
+
 // ---------- Enquiry form (not connected to a backend yet) ----------
 document.querySelector('.enquire').addEventListener('submit', (e) => {
   e.preventDefault();
