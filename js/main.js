@@ -187,17 +187,19 @@ if (build) {
   renderBuild();
 }
 
-// ---------- Portfolio cards rise in on scroll ----------
-if ('IntersectionObserver' in window) {
-  const cards = document.querySelectorAll('.project');
-  const seen = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add('is-in');
-      seen.unobserve(entry.target);
+// ---------- Portfolio: More button opens the rest of the images ----------
+const moreButton = document.querySelector('.more-button');
+if (moreButton) {
+  const extra = [...document.querySelectorAll('.project[data-more]')];
+  if (!extra.length) moreButton.hidden = true;
+  moreButton.addEventListener('click', () => {
+    extra.forEach((item, i) => {
+      item.hidden = false;
+      item.style.animationDelay = `${(i % 3) * 0.08}s`;
+      item.classList.add('is-new');
     });
-  }, { rootMargin: '0px 0px -8% 0px' });
-  cards.forEach((card) => { card.classList.add('reveal'); seen.observe(card); });
+    moreButton.hidden = true;
+  });
 }
 
 // ---------- Enquiry form (not connected to a backend yet) ----------

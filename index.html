@@ -155,77 +155,30 @@
       </figure>
     </section>
 
-    <!-- Portfolio: one card per image, numbered, with a title and a small
-         label (room and style). The cards sit on an uneven twelve-column
-         grid; their places are set by position in css/styles.css. Add the
-         class project--wide to a landscape image. -->
+    <!-- Portfolio: a plain grid of upright images, three to a row, with no
+         captions. The first row shows; the More button opens the rest.
+         To add an image, copy a <figure> line; keep data-more and hidden on
+         every image after the first three. -->
     <section class="projects" id="portfolio">
-      <div class="projects-head">
-        <h2 class="projects-title">Portfolio</h2>
-        <p class="lead">Every home asks for something different. Here are a few of the directions we design in.</p>
-      </div>
+      <p class="eyebrow">Portfolio</p>
       <div class="project-row">
-        <figure class="project project--wide">
-          <div class="project-media graded">
-            <img src="images/portfolio-4.webp" alt="Classic ivory kitchen with brass lanterns, glass-front cabinets and a marble island" width="1800" height="1200" loading="lazy">
-          </div>
-          <figcaption>
-            <span class="project-index">01</span>
-            <div>
-              <h3 class="project-title">The Ivory Kitchen</h3>
-              <p class="project-label">Kitchen &middot; Classic</p>
-            </div>
-          </figcaption>
+        <figure class="project graded">
+          <img src="images/portfolio-1.webp" alt="Kitchen with a rounded oak island, veined marble and a sculpted plaster hood" width="1200" height="1680" loading="lazy">
         </figure>
-        <figure class="project">
-          <div class="project-media graded">
-            <img src="images/portfolio-1.webp" alt="Kitchen with a rounded oak island, veined marble and a sculpted plaster hood" width="1200" height="1680" loading="lazy">
-          </div>
-          <figcaption>
-            <span class="project-index">02</span>
-            <div>
-              <h3 class="project-title">The Curved Oak Kitchen</h3>
-              <p class="project-label">Kitchen &middot; Organic modern</p>
-            </div>
-          </figcaption>
+        <figure class="project graded">
+          <img src="images/portfolio-2.webp" alt="Fireplace wrapped in bold veined stone with lit floating shelves beside it" width="1200" height="1680" loading="lazy">
         </figure>
-        <figure class="project">
-          <div class="project-media graded">
-            <img src="images/portfolio-2.webp" alt="Fireplace wrapped in bold veined stone with lit floating shelves beside it" width="1200" height="1680" loading="lazy">
-          </div>
-          <figcaption>
-            <span class="project-index">03</span>
-            <div>
-              <h3 class="project-title">The Stone Hearth</h3>
-              <p class="project-label">Living room &middot; Fireplace</p>
-            </div>
-          </figcaption>
+        <figure class="project graded">
+          <img src="images/portfolio-3.webp" alt="Kitchen with bronze pendant lights, a farmhouse sink under a garden window and an oak island" width="1200" height="1680" loading="lazy">
         </figure>
-        <figure class="project">
-          <div class="project-media graded">
-            <img src="images/portfolio-3.webp" alt="Kitchen with bronze pendant lights, a farmhouse sink under a garden window and an oak island" width="1200" height="1680" loading="lazy">
-          </div>
-          <figcaption>
-            <span class="project-index">04</span>
-            <div>
-              <h3 class="project-title">The Garden Kitchen</h3>
-              <p class="project-label">Kitchen &middot; Modern farmhouse</p>
-            </div>
-          </figcaption>
+        <figure class="project graded" data-more hidden>
+          <img src="images/portfolio-4.webp" alt="Classic ivory kitchen with brass lanterns and a marble island" width="1200" height="1680" loading="lazy">
         </figure>
-        <figure class="project project--wide">
-          <div class="project-media graded">
-            <img src="images/portfolio-5.webp" alt="Light oak kitchen with a stone waterfall island and steel-framed doors to a garden" width="1800" height="1200" loading="lazy">
-          </div>
-          <figcaption>
-            <span class="project-index">05</span>
-            <div>
-              <h3 class="project-title">The Courtyard Kitchen</h3>
-              <p class="project-label">Kitchen &middot; Warm contemporary</p>
-            </div>
-          </figcaption>
+        <figure class="project graded" data-more hidden>
+          <img src="images/portfolio-5.webp" alt="Light oak kitchen with a stone waterfall island and a fluted hood" width="1200" height="1680" loading="lazy">
         </figure>
       </div>
+      <button class="more-button" type="button" aria-expanded="false">More</button>
     </section>
 
     <section class="contact" id="contact">
