@@ -122,31 +122,37 @@ if (build) {
   let ticking = false;
   let shown = -1;
 
-  // Where a point of the photo lands on screen, given object-fit: cover
+  const box = build.querySelector('.build-layers');
+
+  // Where a point of the photo lands inside the pinned area
   const targetPoint = (caption) => {
-    const img = layers[0].querySelector('img');
-    const portrait = window.matchMedia('(orientation: portrait)').matches;
-    const fx = parseFloat(portrait ? caption.dataset.mx : caption.dataset.x);
-    const fy = parseFloat(portrait ? caption.dataset.my : caption.dataset.y);
-    const iw = img.naturalWidth || 16;
-    const ih = img.naturalHeight || 9;
-    const cw = pin.clientWidth;
-    const chh = pin.clientHeight;
-    const scale = Math.max(cw / iw, chh / ih);
-    return { x: (cw - iw * scale) / 2 + fx * iw * scale, y: (chh - ih * scale) / 2 + fy * ih * scale };
+    const p = pin.getBoundingClientRect();
+    const r = box.getBoundingClientRect();
+    return {
+      x: r.left - p.left + parseFloat(caption.dataset.x) * r.width,
+      y: r.top - p.top + parseFloat(caption.dataset.y) * r.height,
+    };
   };
 
   const drawLeader = (index, animate) => {
     const t = targetPoint(captions[index]);
-    const left = card.offsetLeft;
-    const right = left + card.offsetWidth;
-    const x1 = Math.min(right, Math.max(left + 24, t.x));
-    const y1 = card.offsetTop;
-    const visible = t.y < y1 - 8; // hide if the target sits behind the card
+    const p = pin.getBoundingClientRect();
+    const c = card.getBoundingClientRect();
+    const left = c.left - p.left;
+    const right = c.right - p.left;
+    const top = c.top - p.top;
+    let x1;
+    let y1;
+    if (t.x > right) {
+      // Caption beside the image: start at the caption's title
+      x1 = right; y1 = top + 44;
+    } else {
+      // Caption below the image: start from its top edge
+      x1 = Math.min(right, Math.max(left + 24, t.x)); y1 = top - 6;
+    }
     line.setAttribute('x1', x1); line.setAttribute('y1', y1);
     line.setAttribute('x2', t.x); line.setAttribute('y2', t.y);
     dot.setAttribute('cx', t.x); dot.setAttribute('cy', t.y);
-    leader.style.visibility = visible ? '' : 'hidden';
     if (animate) {
       leader.classList.remove('is-drawn');
       void leader.getBoundingClientRect(); // restart the draw animation
@@ -177,7 +183,7 @@ if (build) {
   };
   window.addEventListener('scroll', requestBuild, { passive: true });
   window.addEventListener('resize', () => { if (shown >= 0) drawLeader(shown, false); requestBuild(); });
-  layers[0].querySelector('img').addEventListener('load', () => { if (shown >= 0) drawLeader(shown, false); });
+  layers[0].addEventListener('load', () => { if (shown >= 0) drawLeader(shown, false); });
   renderBuild();
 }
 
