@@ -265,20 +265,28 @@ if (consult) {
   });
   consult.querySelectorAll('[data-consult-close]').forEach((el) => el.addEventListener('click', closeConsult));
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !consult.hidden) closeConsult(); });
-
-  // The form is not connected to a backend yet, so nothing is sent.
-  consult.querySelector('.consult-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const status = consult.querySelector('.consult-status');
-    status.textContent = 'This form is not connected yet, so your details were not sent. Please call us for now.';
-    status.hidden = false;
-  });
 }
 
-// ---------- Enquiry form (not connected to a backend yet) ----------
-document.querySelector('.enquire').addEventListener('submit', (e) => {
-  e.preventDefault();
-  e.target.querySelector('button').textContent = 'Form not connected yet';
+// ---------- Enquiry forms (not connected to a backend yet) ----------
+// Checks the required fields and explains that nothing was sent.
+document.querySelectorAll('.enquiry').forEach((form) => {
+  const status = form.querySelector('.enquiry-status');
+  const country = form.querySelector('select');
+  const markCountry = () => { country.toggleAttribute('data-empty', !country.value); };
+  markCountry();
+  country.addEventListener('change', markCountry);
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const missing = [...form.querySelectorAll('[required]')].find((field) => !field.checkValidity());
+    if (missing) {
+      status.textContent = 'Please fill in your first name, last name and a valid email.';
+      status.hidden = false;
+      missing.focus();
+      return;
+    }
+    status.textContent = 'This form is not connected yet, so your message was not sent. Please call us for now.';
+    status.hidden = false;
+  });
 });
 
 document.getElementById('year').textContent = new Date().getFullYear();
