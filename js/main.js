@@ -187,18 +187,60 @@ if (build) {
   renderBuild();
 }
 
-// ---------- Portfolio: More button opens the rest of the images ----------
-const moreButton = document.querySelector('.more-button');
-if (moreButton) {
-  const extra = [...document.querySelectorAll('.project[data-more]')];
-  if (!extra.length) moreButton.hidden = true;
-  moreButton.addEventListener('click', () => {
-    extra.forEach((item, i) => {
-      item.hidden = false;
-      item.style.animationDelay = `${(i % 3) * 0.08}s`;
-      item.classList.add('is-new');
-    });
-    moreButton.hidden = true;
+// ---------- Full portfolio (folder view) ----------
+// Opened by anything marked data-gallery (the menu link and the More button).
+// First level: the category folders. Second level: the images of one category.
+const gallery = document.getElementById('gallery');
+if (gallery) {
+  const title = gallery.querySelector('.gallery-title');
+  const folders = gallery.querySelector('.gallery-folders');
+  const sets = [...gallery.querySelectorAll('.gallery-set')];
+  const back = gallery.querySelector('.gallery-back');
+  const close = gallery.querySelector('.gallery-close');
+  let opener = null;
+
+  const showFolders = () => {
+    sets.forEach((s) => { s.hidden = true; });
+    folders.hidden = false;
+    back.hidden = true;
+    title.textContent = 'Portfolio';
+    gallery.scrollTop = 0;
+  };
+  const showSet = (name) => {
+    const set = sets.find((s) => s.dataset.set === name);
+    if (!set) return;
+    folders.hidden = true;
+    sets.forEach((s) => { s.hidden = s !== set; });
+    back.hidden = false;
+    title.textContent = set.dataset.name;
+    gallery.scrollTop = 0;
+  };
+  const openGallery = (from) => {
+    opener = from || null;
+    if (typeof setMenu === 'function') setMenu(false);
+    showFolders();
+    gallery.hidden = false;
+    document.body.style.overflow = 'hidden';
+    close.focus();
+  };
+  const closeGallery = () => {
+    gallery.hidden = true;
+    document.body.style.overflow = '';
+    if (opener) opener.focus();
+  };
+
+  document.querySelectorAll('[data-gallery]').forEach((el) => {
+    el.addEventListener('click', (e) => { e.preventDefault(); openGallery(el); });
+  });
+  folders.addEventListener('click', (e) => {
+    const folder = e.target.closest('.folder');
+    if (folder) showSet(folder.dataset.open);
+  });
+  back.addEventListener('click', showFolders);
+  close.addEventListener('click', closeGallery);
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape' || gallery.hidden) return;
+    if (back.hidden) closeGallery(); else showFolders();
   });
 }
 
