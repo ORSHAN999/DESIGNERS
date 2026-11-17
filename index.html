@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Process — Studio Name</title>
-  <meta name="description" content="How we design your home, in five clear steps from the first call to construction support.">
+  <title>Due Belle | Interior Design Studio, Las Vegas</title>
+  <meta name="description" content="Due Belle is an interior design studio in Las Vegas, Nevada. One beautiful design, from the first idea to the finished home.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -18,7 +18,7 @@
       <a href="#design" aria-current="page">Process</a>
       <a href="#portfolio">Portfolio</a>
     </nav>
-    <a class="wordmark" href="#top" aria-label="Studio Name, home">STUDIO</a>
+    <a class="wordmark" href="#top" aria-label="Due Belle, home">Due Belle</a>
     <nav class="nav nav-right" aria-label="Secondary">
       <a href="#journal">Journal</a>
       <a href="#contact">Contact</a>
@@ -41,6 +41,10 @@
            and a portrait file (1290x2293, phones). Every image gets the same colour treatment from .graded in the CSS. -->
       <div class="slides graded">
         <picture class="slide is-active">
+          <source media="(orientation: portrait)" srcset="images/hero-home-mobile.webp">
+          <img src="images/hero-home-desktop.webp" alt="A modern desert home at sunset with stone walls, a wood entry door and mountains behind" width="3200" height="1800">
+        </picture>
+        <picture class="slide">
           <source media="(orientation: portrait)" srcset="images/hero-1-mobile.webp">
           <img src="images/hero-1-desktop.webp" alt="Entry hall with a curved staircase, arched windows and an olive tree" width="3200" height="1800">
         </picture>
@@ -49,7 +53,13 @@
           <img src="images/hero-2-desktop.webp" alt="Stone farmhouse sink below a black-framed window with a desert view" width="3200" height="1800">
         </picture>
       </div>
-      <a href="#portfolio">Portfolio</a>
+      <div class="hero-brand">
+        <h1 class="hero-name">Due Belle</h1>
+        <p class="hero-kind"><span>Interior Design Studio</span></p>
+        <p class="hero-tagline">One Beautiful Design.</p>
+        <p class="hero-place">Las Vegas &middot; Nevada</p>
+        <a class="hero-link" href="#portfolio">Portfolio</a>
+      </div>
     </section>
 
     <section class="process" id="design">
@@ -219,7 +229,7 @@
   </main>
 
   <footer class="site-footer" id="journal">
-    <p>Copyright &copy; <span id="year">2026</span> Studio Name. All rights reserved.</p>
+    <p>Copyright &copy; <span id="year">2026</span> Due Belle Interior Design Studio. All rights reserved.</p>
     <a href="#">Privacy policy</a>
   </footer>
 

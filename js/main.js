@@ -70,7 +70,7 @@ function nextSlide() {
 const heroInView = () => window.scrollY < heroEl.offsetHeight;
 
 // 1 + 2: studio name, menu items, hero categories
-const triggers = [...document.querySelectorAll('.wordmark, .site-header .nav a, .hero > a')];
+const triggers = [...document.querySelectorAll('.wordmark, .site-header .nav a, .hero-link')];
 let lastTrigger = null;
 triggers.forEach((el) => {
   el.addEventListener('pointerenter', (e) => {
