@@ -21,19 +21,19 @@
     <a class="wordmark" href="#top" aria-label="Due Belle, home">Due Belle</a>
     <nav class="nav nav-right" aria-label="Secondary">
       <a href="#journal">Journal</a>
-      <a href="#contact">Contact</a>
-      <button class="nav-cta" type="button" data-consult>Free consultation</button>
+      <a href="#contact" data-consult>Contact</a>
+      <a class="nav-cta" href="#contact" data-consult>Free consultation</a>
     </nav>
     <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu"><span></span><span></span></button>
   </header>
 
   <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile" hidden>
-    <button class="mobile-cta" type="button" data-consult>Free consultation</button>
     <a href="#practice">Practice</a>
     <a href="#design">Process</a>
     <a href="#portfolio" data-gallery>Portfolio</a>
     <a href="#journal">Journal</a>
-    <a href="#contact">Contact</a>
+    <a href="#contact" data-consult>Contact</a>
+    <a href="#contact" data-consult>Free consultation</a>
   </nav>
 
   <main>
@@ -183,49 +183,43 @@
     </section>
 
     <section class="contact" id="contact">
-      <div class="contact-intro">
+      <div class="contact-side">
         <p class="lead">Every space is a conversation before it is a drawing, and it starts with how you want to use it. This is where that conversation begins.</p>
-        <p class="small">We take on a limited number of private projects each year, and keep selected work unpublished when our clients ask for privacy.</p>
+        <dl class="details">
+          <div><dt>Studio</dt><dd>Las Vegas, Nevada<br>By appointment only</dd></div>
+          <div><dt>Phone</dt><dd><a href="tel:+10000000000">(000) 000-0000</a></dd></div>
+          <div><dt>Email</dt><dd><a href="mailto:hello@example.com">hello@example.com</a></dd></div>
+        </dl>
       </div>
-      <div class="contact-cols">
-        <div>
-          <h2>Connect.</h2>
-          <dl class="details">
-            <div><dt>Address</dt><dd>Street address, City, State ZIP<br>By appointment only</dd></div>
-            <div><dt>Phone</dt><dd><a href="tel:+10000000000">(000) 000-0000</a></dd></div>
-            <div><dt>Email</dt><dd><a href="mailto:hello@example.com">Click here</a></dd></div>
-          </dl>
-        </div>
-        <div>
-          <h2>Enquire.</h2>
-          <form class="enquiry" action="#" method="post" novalidate>
-            <div class="enquiry-fields">
-              <label class="sr-only" for="contact-first">First name (required)</label>
-              <input id="contact-first" type="text" name="first_name" placeholder="First name*" autocomplete="given-name" required>
-              <label class="sr-only" for="contact-last">Last name (required)</label>
-              <input id="contact-last" type="text" name="last_name" placeholder="Last name*" autocomplete="family-name" required>
-              <label class="sr-only" for="contact-phone">Phone number</label>
-              <input id="contact-phone" type="tel" name="phone" placeholder="Phone number" autocomplete="tel">
-              <label class="sr-only" for="contact-email">Email (required)</label>
-              <input id="contact-email" type="email" name="email" placeholder="Email*" autocomplete="email" required>
-              <label class="sr-only" for="contact-country">Country</label>
-              <select id="contact-country" class="enquiry-wide" name="country" autocomplete="country-name">
-                <option value="" selected>Country</option>
-                <option>United States</option>
-                <option>Canada</option>
-                <option>Mexico</option>
-                <option>United Kingdom</option>
-                <option>Israel</option>
-                <option>Other</option>
-              </select>
-              <label class="enquiry-wide enquiry-message" for="contact-message">Message
-                <textarea id="contact-message" name="message" rows="5"></textarea>
-              </label>
-            </div>
-            <p class="enquiry-status" role="status" hidden></p>
-            <button type="submit">Send</button>
-          </form>
-        </div>
+      <div class="contact-main">
+        <h2 class="enquiry-title">Enquire.</h2>
+        <form class="enquiry" action="#" method="post" novalidate>
+          <div class="enquiry-fields">
+            <label class="sr-only" for="contact-first">First name (required)</label>
+            <input id="contact-first" type="text" name="first_name" placeholder="First name*" autocomplete="given-name" required>
+            <label class="sr-only" for="contact-last">Last name (required)</label>
+            <input id="contact-last" type="text" name="last_name" placeholder="Last name*" autocomplete="family-name" required>
+            <label class="sr-only" for="contact-phone">Phone number</label>
+            <input id="contact-phone" type="tel" name="phone" placeholder="Phone number" autocomplete="tel">
+            <label class="sr-only" for="contact-email">Email (required)</label>
+            <input id="contact-email" type="email" name="email" placeholder="Email*" autocomplete="email" required>
+            <label class="sr-only" for="contact-country">Country</label>
+            <select id="contact-country" class="enquiry-wide" name="country" autocomplete="country-name">
+              <option value="" selected>Country</option>
+              <option>United States</option>
+              <option>Canada</option>
+              <option>Mexico</option>
+              <option>United Kingdom</option>
+              <option>Israel</option>
+              <option>Other</option>
+            </select>
+            <label class="enquiry-wide enquiry-message" for="contact-message">Message
+              <textarea id="contact-message" name="message" rows="5"></textarea>
+            </label>
+          </div>
+          <p class="enquiry-status" role="status" hidden></p>
+          <button type="submit">Send</button>
+        </form>
       </div>
     </section>
 
@@ -301,43 +295,47 @@
     <div class="consult-backdrop" data-consult-close></div>
     <div class="consult-panel" role="dialog" aria-modal="true" aria-labelledby="consult-title">
       <button class="consult-close" type="button" data-consult-close>Close</button>
-      <h2 class="consult-title" id="consult-title">Free consultation</h2>
-      <p class="consult-lead">Call us for a free consultation, or leave your details and we will call you back.</p>
-
-      <div class="consult-block">
-        <p class="consult-label">Call us</p>
-        <p class="consult-phone"><a href="tel:+10000000000">(000) 000-0000</a></p>
-      </div>
-
-      <div class="consult-block">
-        <h3 class="enquiry-title">Enquire.</h3>
-        <form class="enquiry" action="#" method="post" novalidate>
-          <div class="enquiry-fields">
-            <label class="sr-only" for="consult-first">First name (required)</label>
-            <input id="consult-first" type="text" name="first_name" placeholder="First name*" autocomplete="given-name" required>
-            <label class="sr-only" for="consult-last">Last name (required)</label>
-            <input id="consult-last" type="text" name="last_name" placeholder="Last name*" autocomplete="family-name" required>
-            <label class="sr-only" for="consult-phone">Phone number</label>
-            <input id="consult-phone" type="tel" name="phone" placeholder="Phone number" autocomplete="tel">
-            <label class="sr-only" for="consult-email">Email (required)</label>
-            <input id="consult-email" type="email" name="email" placeholder="Email*" autocomplete="email" required>
-            <label class="sr-only" for="consult-country">Country</label>
-            <select id="consult-country" class="enquiry-wide" name="country" autocomplete="country-name">
-              <option value="" selected>Country</option>
-              <option>United States</option>
-              <option>Canada</option>
-              <option>Mexico</option>
-              <option>United Kingdom</option>
-              <option>Israel</option>
-              <option>Other</option>
-            </select>
-            <label class="enquiry-wide enquiry-message" for="consult-message">Message
-              <textarea id="consult-message" name="message" rows="5"></textarea>
-            </label>
-          </div>
-          <p class="enquiry-status" role="status" hidden></p>
-          <button type="submit">Send</button>
-        </form>
+      <div class="consult-grid">
+        <div class="consult-side">
+          <p class="eyebrow">Free consultation</p>
+          <h2 class="consult-title" id="consult-title">Let&rsquo;s talk about your space.</h2>
+          <p class="consult-lead">Call us, or leave your details and we will call you back.</p>
+          <dl class="details">
+            <div><dt>Phone</dt><dd><a href="tel:+10000000000">(000) 000-0000</a></dd></div>
+            <div><dt>Email</dt><dd><a href="mailto:hello@example.com">hello@example.com</a></dd></div>
+            <div><dt>Studio</dt><dd>Las Vegas, Nevada<br>By appointment only</dd></div>
+          </dl>
+        </div>
+        <div class="consult-main">
+          <h3 class="enquiry-title">Enquire.</h3>
+          <form class="enquiry" action="#" method="post" novalidate>
+            <div class="enquiry-fields">
+              <label class="sr-only" for="consult-first">First name (required)</label>
+              <input id="consult-first" type="text" name="first_name" placeholder="First name*" autocomplete="given-name" required>
+              <label class="sr-only" for="consult-last">Last name (required)</label>
+              <input id="consult-last" type="text" name="last_name" placeholder="Last name*" autocomplete="family-name" required>
+              <label class="sr-only" for="consult-phone">Phone number</label>
+              <input id="consult-phone" type="tel" name="phone" placeholder="Phone number" autocomplete="tel">
+              <label class="sr-only" for="consult-email">Email (required)</label>
+              <input id="consult-email" type="email" name="email" placeholder="Email*" autocomplete="email" required>
+              <label class="sr-only" for="consult-country">Country</label>
+              <select id="consult-country" class="enquiry-wide" name="country" autocomplete="country-name">
+                <option value="" selected>Country</option>
+                <option>United States</option>
+                <option>Canada</option>
+                <option>Mexico</option>
+                <option>United Kingdom</option>
+                <option>Israel</option>
+                <option>Other</option>
+              </select>
+              <label class="enquiry-wide enquiry-message" for="consult-message">Message
+                <textarea id="consult-message" name="message" rows="5"></textarea>
+              </label>
+            </div>
+            <p class="enquiry-status" role="status" hidden></p>
+            <button type="submit">Send</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
