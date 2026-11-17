@@ -74,8 +74,39 @@ a { color: inherit; text-decoration: none; }
 .menu-open .site-header { background: var(--paper); color: var(--ink); }
 .menu-open .site-header .menu-toggle span { background: var(--ink); }
 .nav { display: flex; padding-top: 2px; }
-.nav-left { gap: 74px; }
-.nav-right { gap: 74px; justify-content: flex-end; }
+.nav-right { gap: clamp(28px, 3.4vw, 56px); justify-content: flex-end; align-items: flex-start; }
+.nav-left { gap: clamp(28px, 4vw, 74px); }
+/* Call-to-action in the top bar */
+.nav-cta {
+  margin-top: -11px;
+  padding: 10px 16px;
+  border: 1px solid currentColor;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+.nav-cta:hover { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.site-header.over-hero .nav-cta:hover { background: var(--paper); border-color: var(--paper); color: var(--ink); }
+.mobile-cta {
+  margin-bottom: 20px;
+  padding: 18px 16px;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  font: inherit;
+  font-size: 13px;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
 .nav a:hover, .text-link:hover, .site-footer a:hover { opacity: 0.55; }
 
 .wordmark {
@@ -484,6 +515,74 @@ a { color: inherit; text-decoration: none; }
 .folder-name { display: block; margin-top: 18px; font-family: var(--serif); font-size: 28.67px; line-height: 1.15; letter-spacing: -0.005em; }
 .folder-count { display: block; margin-top: 8px; font-size: 11.75px; font-weight: 500; line-height: 1; text-transform: uppercase; opacity: 0.6; }
 
+/* ---------- Free consultation panel ---------- */
+.consult { position: fixed; inset: 0; z-index: 300; }
+.consult-backdrop { position: absolute; inset: 0; background: rgba(40, 28, 22, 0.35); animation: gallery-in 0.3s ease both; }
+.consult-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(480px, 100%);
+  overflow-y: auto;
+  padding: 26px 32px 40px;
+  background: var(--paper);
+  animation: consult-in 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+@keyframes consult-in { from { transform: translateX(100%); } }
+.consult-close {
+  display: block;
+  margin: 0 0 56px auto;
+  padding: 0 0 4px;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 13px;
+  line-height: 1;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.consult-title { font-family: var(--serif); font-weight: 400; font-size: 44px; line-height: 1; letter-spacing: -0.015em; }
+.consult-lead { margin-top: 18px; max-width: 34ch; font-size: 15px; line-height: 1.55; font-weight: 400; }
+.consult-block { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--ink); }
+.consult-label { font-size: 11.75px; font-weight: 500; line-height: 1; text-transform: uppercase; }
+.consult-phone { margin-top: 14px; font-family: var(--serif); font-size: 34px; line-height: 1.1; font-variant-numeric: lining-nums; }
+.consult-phone a:hover { opacity: 0.6; }
+.consult-form { margin-top: 18px; }
+.consult-form label { display: block; margin-bottom: 14px; font-size: 11.75px; font-weight: 500; line-height: 1.3; text-transform: uppercase; }
+.consult-form input, .consult-form textarea {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  padding: 8px 0;
+  border: 0;
+  border-bottom: 1px solid var(--ink);
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font: 400 16px/1.4 var(--sans);
+  resize: vertical;
+}
+.consult-form input:focus, .consult-form textarea:focus { outline: none; background: rgba(0, 0, 0, 0.04); }
+.consult-form button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 18px 16px;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  font: inherit;
+  font-size: 13px;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.consult-form button:hover { background: transparent; color: var(--ink); }
+.consult-status { margin-top: 14px; font-size: 13px; font-weight: 400; line-height: 1.5; }
+
 /* ---------- Contact ---------- */
 .contact {
   display: grid;
@@ -591,6 +690,7 @@ a { color: inherit; text-decoration: none; }
   .slide { transition: opacity 0.6s ease; }
   .project.is-new { animation: none; }
   .gallery { animation: none; }
+  .consult-panel, .consult-backdrop { animation: none; }
   .folder-media img { transition: none; }
   .folder:hover .folder-media img { transform: none; }
   .build-caption { transform: none; transition: opacity 0.2s ease; }

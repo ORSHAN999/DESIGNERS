@@ -244,6 +244,37 @@ if (gallery) {
   });
 }
 
+// ---------- Free consultation panel ----------
+const consult = document.getElementById('consult');
+if (consult) {
+  let consultOpener = null;
+  const openConsult = (from) => {
+    consultOpener = from || null;
+    if (typeof setMenu === 'function') setMenu(false);
+    consult.hidden = false;
+    document.body.style.overflow = 'hidden';
+    consult.querySelector('.consult-close').focus();
+  };
+  const closeConsult = () => {
+    consult.hidden = true;
+    document.body.style.overflow = '';
+    if (consultOpener) consultOpener.focus();
+  };
+  document.querySelectorAll('[data-consult]').forEach((el) => {
+    el.addEventListener('click', (e) => { e.preventDefault(); openConsult(el); });
+  });
+  consult.querySelectorAll('[data-consult-close]').forEach((el) => el.addEventListener('click', closeConsult));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !consult.hidden) closeConsult(); });
+
+  // The form is not connected to a backend yet, so nothing is sent.
+  consult.querySelector('.consult-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const status = consult.querySelector('.consult-status');
+    status.textContent = 'This form is not connected yet, so your details were not sent. Please call us for now.';
+    status.hidden = false;
+  });
+}
+
 // ---------- Enquiry form (not connected to a backend yet) ----------
 document.querySelector('.enquire').addEventListener('submit', (e) => {
   e.preventDefault();

@@ -22,11 +22,13 @@
     <nav class="nav nav-right" aria-label="Secondary">
       <a href="#journal">Journal</a>
       <a href="#contact">Contact</a>
+      <button class="nav-cta" type="button" data-consult>Free consultation</button>
     </nav>
     <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu"><span></span><span></span></button>
   </header>
 
   <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile" hidden>
+    <button class="mobile-cta" type="button" data-consult>Free consultation</button>
     <a href="#practice">Practice</a>
     <a href="#design">Process</a>
     <a href="#portfolio" data-gallery>Portfolio</a>
@@ -62,7 +64,7 @@
       <div class="process-intro">
         <p class="eyebrow">Design</p>
         <p class="lead">From the first idea to the final finish, we design your space with care and precision. We lead each step for you, so the process feels calm and the result feels like yours.</p>
-        <a class="text-link" href="#contact">Request consultation</a>
+        <a class="text-link" href="#contact" data-consult>Free consultation</a>
       </div>
       <div class="steps">
           <article class="step" style="--i:0">
@@ -269,6 +271,35 @@
         <figure class="project"><img src="images/portfolio-7.webp" alt="Hallway with a lit oak staircase, plaster arches and a checkered stone floor" width="1200" height="1680" loading="lazy"></figure>
       </div>
     </section>
+  </div>
+
+  <!-- Free consultation panel, opened by anything marked data-consult (the
+       button in the top bar, the mobile menu and the link beside the steps).
+       Replace the phone number below with the studio's real one. The form is
+       not connected to anything yet. -->
+  <div class="consult" id="consult" hidden>
+    <div class="consult-backdrop" data-consult-close></div>
+    <div class="consult-panel" role="dialog" aria-modal="true" aria-labelledby="consult-title">
+      <button class="consult-close" type="button" data-consult-close>Close</button>
+      <h2 class="consult-title" id="consult-title">Free consultation</h2>
+      <p class="consult-lead">Call us for a free consultation, or leave your details and we will call you back.</p>
+
+      <div class="consult-block">
+        <p class="consult-label">Call us</p>
+        <p class="consult-phone"><a href="tel:+10000000000">(000) 000-0000</a></p>
+      </div>
+
+      <div class="consult-block">
+        <p class="consult-label">Or we call you</p>
+        <form class="consult-form" action="#" method="post">
+          <label for="consult-name">Name<input id="consult-name" type="text" name="name" autocomplete="name" required></label>
+          <label for="consult-phone">Phone<input id="consult-phone" type="tel" name="phone" autocomplete="tel" required></label>
+          <label for="consult-note">What would you like to design? (optional)<textarea id="consult-note" name="note" rows="2"></textarea></label>
+          <button type="submit">Call me back</button>
+          <p class="consult-status" role="status" hidden></p>
+        </form>
+      </div>
+    </div>
   </div>
 
   <footer class="site-footer" id="journal">
